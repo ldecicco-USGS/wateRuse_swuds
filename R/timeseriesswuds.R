@@ -1,14 +1,10 @@
-#'
-#' timeseriesswuds
+#' timeseriesswuds.R
 #' 
+#' Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
 #' 
 #' @param dec_date is decimate date in fractions of year
-#' 
-#' @param volume_mgd is water-use rate in million gallons per day, monthly and annual
-#' 
-#' @param categories are character categorical attributes defined in your datafile such as water-use caragory, state, county, HUC, aquifer, site type, water type, year, month, season, quantile by which data are filtered
-#' 
-#' @param categories.column character that defines which column to use to specify category
+#' @param volume_mgd is water-use rate in million gallons per day, monthly
+#' @param ANNUAL_VAL is water-use rate in million gallons per day, annually
 #' 
 #' # old from wateRuse
 #' @param y.scale allows R to set the y-axis scale given available data range. Defaults to NA which lets R set the scale based on dataset values.
@@ -24,49 +20,67 @@
 #' 
 #' @examples 
 #' #setwd("~/wateRuse_swuds/wateRuse_swuds")
-#' df <- swudsSample
+#' @examples
 #' 
-#' df2<-df[!is.na(df$Volume_mgd),]
 #' 
-#' #df2<- subset(df,select=c(FROM_AGENCY_CD,FROM_SITE_NO,FROM_STATION_NM,FROM_SITE_TP_CD,YEAR,ANNUAL_VAL,JAN_VAL,FEB_VAL,MAR_VAL,APR_VAL,MAY_VAL,JUN_VAL,JUL_VAL,AUG_VAL,SEP_VAL,OCT_VAL,NOV_VAL,DEC_VAL))
+#' swudsSample <- readRDS("C:/kyproj/TRAINING/R_Training/wateRuse_swuds/wateRuse_swuds3/wateRuse_swuds/data/swudsSample.RDS")
 #' 
-#' #df3 <- df2[which(df2$'RGHT+OH015'`=='01049'),]
-#' #newdata <- mydata[ which(gender=='F' & age > 65),]detach(mydata)
+#' df <- swudsSample #example data intakes from Ohio, all categories
 #' 
-#' df3 <- df2[ which(df2$FROM_AGENCY_CD =='USEPA' & df2$FROM_SITE_NO == '410233083375001'),]
+#' df2 <- df[!is.na(df$Volume_mgd),]   # remove missing values to thin data
 #' 
-#' df4 <- df3[ which(df3$YEAR > 2000),]
+#' df3 <- df2[ which(df2$FROM_AGENCY_CD =='USEPA' & df2$FROM_SITE_NO == '410233083375001'),]# select specific site
 #' 
-#'  
+#' df4 <- df3[ which(df3$YEAR > 1990),]  # subset years
+#'   
+#'    df4$YEAR<-as.factor(df4$YEAR)     # need factor YEAR to get discrete colors
+#'    df4$YEAR<-as.character.factor(df4$YEAR)   
+#'   
+#'       
 #'   library(ggplot2)
-#'  # p1<-ggplot(data=df4)
-#'  # p1 <- p1 + geom_point(aes_string(x = "dec_date", y = "Volume_mgd"))
-#'    
-#'   p1<-ggplot(df4, aes_string(x = "dec_date", y = "Volume_mgd")) + geom_point() + geom_line()
+#'   library(scales)
 #'  
-#'   plot(p1)
+#'    # with factor year 
+#'    p1<-ggplot(df4, aes_string(x="Month_num", y="Volume_mgd", col="YEAR")) + geom_point() + geom_line()
+#'    plot(p1)
+#'    
+#'    # ticks at 1:12 months
+#'    p2<-p1 + scale_x_continuous(breaks=c(1:12))
+#'    plot(p2)
+#'    
+#'      
+#'#  Plot annual use ANNUAL_VAL overlaying multiple sites
+#'     
+#'#  Subset to a few sites by selecting on a permit    
 #'   
+#'   df2$From_RGHT_OH015<-as.character(df2$From_RGHT_OH015)
 #'   
+#'   #df5<-df2[which(df2$From_RGHT_OH015=="01049"), ]   # does not work--all NA--values lost in gather?
+#'   #df5<-df2[which(df2$From_DOEN_USDOE=="2857" | df2$From_DOEN_USDOE=="2858"), ]   # n=240 this does work
+#'
+#'  # select on HUC
+#'  # df5<-df2[which(df2$FROM_HUC_CD=="050301061202"), ]
 #'   
+#'  # select on county and national water use code
+#'   df5<-df2[which(df2$FROM_COUNTY_NM=="Delaware County"& df2$FROM_NAT_WATER_USE_CD == 'WS'), ]
 #'   
+#'   df6<-subset(df5,select=c(FROM_AGENCY_CD,FROM_SITE_NO,FROM_STATION_NM,FROM_SITE_TP_CD,YEAR,ANNUAL_VAL,Volume_mgd,From_DOEN_USDOE,FROM_HUC_CD,FROM_COUNTY_NM))
+#' 	
+#' 	# select year range
+#' 	 df7 <- df6[ which(df6$YEAR > 2000 & df6$YEAR < 2011),]
+#' 	
+#'    p3<-ggplot(df7, aes_string(x="YEAR", y="ANNUAL_VAL", col="FROM_STATION_NM")) + scale_x_continuous(breaks= pretty_breaks()) + geom_point() + geom_line()
+#'    plot(p3)
+#' 
+#' 
+#' 
+#' 
+#' 
+#' 
+#' 
+#' 
 
-
-
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-
-#' 
+#' # OLD TIMESERIES CODE FOR AWUDS:
 #' areas <- c("Kent County","Sussex County")
 #' area.column = "COUNTYNAME"
 #' data.elements <- c("PS.GWPop","TP.TotPop")
