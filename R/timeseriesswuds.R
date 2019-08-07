@@ -6,7 +6,8 @@
 #' 
 #' @param volume_mgd is water-use rate in million gallons per day, monthly and annual
 #' 
-#' @param categories are character categorical attributes defined in your datafile such as water-use caragory, state, county, HUC, aquifer, site type, water type, year, month, season, quantile by which data are filtered
+#' @param categories are character categorical attributes defined in your datafile such as 
+#' water-use caragory, state, county, HUC, aquifer, site type, water type, year, month, season, quantile by which data are filtered
 #' 
 #' @param categories.column character that defines which column to use to specify category
 #' 
@@ -23,14 +24,13 @@
 #' @importFrom grDevices colorRampPalette
 #' 
 #' @examples 
-#' #setwd("~/wateRuse_swuds/wateRuse_swuds")
 #' df <- swudsSample
 #' 
 #' df2<-df[!is.na(df$Volume_mgd),]
 #' 
 #' #df2<- subset(df,select=c(FROM_AGENCY_CD,FROM_SITE_NO,FROM_STATION_NM,FROM_SITE_TP_CD,YEAR,ANNUAL_VAL,JAN_VAL,FEB_VAL,MAR_VAL,APR_VAL,MAY_VAL,JUN_VAL,JUL_VAL,AUG_VAL,SEP_VAL,OCT_VAL,NOV_VAL,DEC_VAL))
 #' 
-#' #df3 <- df2[which(df2$'RGHT+OH015'`=='01049'),]
+#' #df3 <- df2[which(df2$`RGHT+OH015`=='01049'),]
 #' #newdata <- mydata[ which(gender=='F' & age > 65),]detach(mydata)
 #' 
 #' df3 <- df2[ which(df2$FROM_AGENCY_CD =='USEPA' & df2$FROM_SITE_NO == '410233083375001'),]
@@ -46,26 +46,6 @@
 #'  
 #'   plot(p1)
 #'   
-#'   
-#'   
-#'   
-
-
-
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-
 #' 
 #' areas <- c("Kent County","Sussex County")
 #' area.column = "COUNTYNAME"
