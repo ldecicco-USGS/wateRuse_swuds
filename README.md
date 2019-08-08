@@ -1,4 +1,4 @@
-# wateRuse_swuds
+# wateRuseSWUDS
 
 ## Disclaimer
 

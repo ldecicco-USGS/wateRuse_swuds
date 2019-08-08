@@ -1,4 +1,4 @@
-library(readxl)
+
 
 # Function to read in SWUDS Water Quantity Excel file into a dataframe
 # and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
@@ -8,7 +8,8 @@ readWaterQuantityXL <- function(file_path){
   dq <- readxl::read_xlsx(path = file_path)
   
   # convert column names to NWIS names 
-  nwisLU <- readxl::read_xlsx("./inst/extdata/nwis_lookup.xlsx")
+  # Probably want to put this in sysdata:
+  nwisLU <- readxl::read_xlsx("inst/extdata/nwis_lookup.xlsx")
   
   swudcols <- nwisLU$swuds
   NWIScols <- nwisLU$nwis
@@ -62,15 +63,14 @@ mergeWaterQuantPopServ <- function(waterQuantDF, popServDF){
 #---------------------------
 meltWaterQuantPopServ <- function(mergeWaterQuantPopServ){
   
-  df_melt<- plyr::rename(df, c("JAN_VAL" = "Jan", "FEB_VAL" = "Feb", "MAR_VAL" = "Mar", "APR_VAL" = "Apr", "MAY_VAL" = "May",
+  df_melt <- dplyr::rename(mergeWaterQuantPopServ, c("JAN_VAL" = "Jan", "FEB_VAL" = "Feb", "MAR_VAL" = "Mar", "APR_VAL" = "Apr", "MAY_VAL" = "May",
                                  "JUN_VAL" = "Jun", "JUL_VAL" = "Jul", "AUG_VAL" = "Aug", "SEP_VAL" = "Sep", "OCT_VAL" = "Oct", "NOV_VAL" = "Nov", 
                                  "DEC_VAL" = "Dec"))
   
-  df_melt <- df_melt %>%
-    gather(Month, Volume_mgd, Jan:Dec)
+  df_melt <- tidyr::gather(df_melt, Month, Volume_mgd, Jan:Dec)
   
   df_melt$Month_num <- match(df_melt$Month, month.abb)
-  df_melt$Month_num <- str_pad(df_melt$Month_num, width = 2, side = "left", pad = "0")
+  df_melt$Month_num <- stringr::str_pad(df_melt$Month_num, width = 2, side = "left", pad = "0")
   
   df_melt$date <- paste(df_melt$YEAR, df_melt$Month_num, "01", sep = "-")
   df_melt$Day <- days_in_month(as.Date(df_melt$date))

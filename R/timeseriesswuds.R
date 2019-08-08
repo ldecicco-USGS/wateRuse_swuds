@@ -6,7 +6,8 @@
 #' 
 #' @param volume_mgd is water-use rate in million gallons per day, monthly and annual
 #' 
-#' @param categories are character categorical attributes defined in your datafile such as water-use caragory, state, county, HUC, aquifer, site type, water type, year, month, season, quantile by which data are filtered
+#' @param categories are character categorical attributes defined in your datafile such as 
+#' water-use caragory, state, county, HUC, aquifer, site type, water type, year, month, season, quantile by which data are filtered
 #' 
 #' @param categories.column character that defines which column to use to specify category
 #' 
@@ -22,72 +23,17 @@
 #' @importFrom tidyr gather_
 #' @importFrom grDevices colorRampPalette
 #' 
-#' @examples 
-#' #setwd("~/wateRuse_swuds/wateRuse_swuds")
-#' df <- swudsSample
-#' 
-#' df2<-df[!is.na(df$Volume_mgd),]
-#' 
-#' #df2<- subset(df,select=c(FROM_AGENCY_CD,FROM_SITE_NO,FROM_STATION_NM,FROM_SITE_TP_CD,YEAR,ANNUAL_VAL,JAN_VAL,FEB_VAL,MAR_VAL,APR_VAL,MAY_VAL,JUN_VAL,JUL_VAL,AUG_VAL,SEP_VAL,OCT_VAL,NOV_VAL,DEC_VAL))
-#' 
-#' #df3 <- df2[which(df2$'RGHT+OH015'`=='01049'),]
-#' #newdata <- mydata[ which(gender=='F' & age > 65),]detach(mydata)
-#' 
-#' df3 <- df2[ which(df2$FROM_AGENCY_CD =='USEPA' & df2$FROM_SITE_NO == '410233083375001'),]
-#' 
-#' df4 <- df3[ which(df3$YEAR > 2000),]
-#' 
-#'  
-#'   library(ggplot2)
-#'  # p1<-ggplot(data=df4)
-#'  # p1 <- p1 + geom_point(aes_string(x = "dec_date", y = "Volume_mgd"))
-#'    
-#'   p1<-ggplot(df4, aes_string(x = "dec_date", y = "Volume_mgd")) + geom_point() + geom_line()
-#'  
-#'   plot(p1)
-#'   
-#'   
-#'   
-#'   
-
-
-
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-
-#' 
-#' areas <- c("Kent County","Sussex County")
-#' area.column = "COUNTYNAME"
-#' data.elements <- c("PS.GWPop","TP.TotPop")
-#' w.use <- subset_wuse(df, data.elements,area.column,areas)
-#' year1 <- 2005
-#' year2 <- 2010
-#' years <- c(year1, year2)
-#' time_series_data(w.use, data.elements, area.column = area.column,areas = areas)
-#' time_series_data(w.use, data.elements, plot.points = FALSE,
-#'        area.column = area.column,areas = areas)
-#' time_series_data(w.use, data.elements, plot.points = FALSE,
-#'        area.column = area.column,areas = areas, legend=FALSE)
-#' time_series_data(w.use, data.elements, area.column)
-#' time_series_data(w.use, data.elements, area.column, y.scale = c(0,1000))
-#' time_series_data(w.use, data.elements, area.column, 
-#'        y.scale = c(0,100),years = c(1990,2005))
 time_series_data <- function(w.use, data.elements, area.column, plot.points = TRUE,
                              years= NA, areas= NA, y.scale=NA, log= FALSE, legend= TRUE,
                              c.palette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")){
 
-  w.use.sub <- subset_wuse(w.use, data.elements, area.column, areas)
+  data.elements <- data.elements[which(!is.na(data.elements))]
+  
+  if (all(is.na(areas))){
+    w.use.sub <- w.use[,c("YEAR",area.column,data.elements)]
+  } else {
+    w.use.sub <-  w.use[w.use[[area.column]] %in% areas, c("YEAR",area.column,data.elements)]
+  }
   
   if(!any(is.na(years))){
     w.use.sub <-  w.use.sub[w.use.sub$YEAR %in% years,]

@@ -7,6 +7,7 @@
 #' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
 #' 
 #' @export
+#' @importFrom stats aggregate
 #' @examples
 #' s.wuds <- swudsSample #example data from Ohio
 #' aquifer <- TBD
