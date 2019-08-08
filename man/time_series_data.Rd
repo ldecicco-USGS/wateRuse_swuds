@@ -2,7 +2,7 @@
 % Please edit documentation in R/timeseriesswuds.R
 \name{time_series_data}
 \alias{time_series_data}
-\title{timeseriesswuds}
+\title{timeseriesswuds.R}
 \usage{
 time_series_data(w.use, data.elements, area.column, plot.points = TRUE,
   years = NA, areas = NA, y.scale = NA, log = FALSE,
@@ -32,5 +32,5 @@ water-use caragory, state, county, HUC, aquifer, site type, water type, year, mo
 # old from wateRuse}
 }
 \description{
-timeseriesswuds
+Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
 }

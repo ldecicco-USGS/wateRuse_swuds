@@ -38,13 +38,14 @@
 #' year <- 2010
 #' unit.type <- "county"
 #' norm.element <- NA
-#' sites.map <- map_sites(s.wuds, data.element, norm.element)
+#' sites.map <- map_sites(s.wuds, data.element, year, state)
 #' data.element <- "JUL_VAL"
 #' norm.element <- "ANNUAL_VAL"
-#' sites.map <- map_sites(s.wuds, data.element, norm.element)
+#' sites.map <- map_sites(s.wuds, data.element, year, state, norm.element)
 #' sites.map
 #' 
-map_sites <- function(s.wuds, data.element, year, state, norm.element=NA, unit.type="county", site.from.to = 'from'){
+map_sites <- function(s.wuds, data.element, year, state, 
+                      norm.element=NA, unit.type="county", site.from.to = 'from'){
   
 
   if(unit.type=="county"){
@@ -67,26 +68,31 @@ map_sites <- function(s.wuds, data.element, year, state, norm.element=NA, unit.t
   hc.subf <- left_join(hc.subf,hc.sub@data, by="id")
   
   # coerce numeric class and normalize if a norm.element is specified
-  s.wuds[, data.element] <- as.numeric(s.wuds[, data.element])
+  s.wuds[, data.element] <- as.numeric(s.wuds[[data.element]])
+  
   if (!is.na(norm.element)){
-   # s.wuds[, norm.element] <- as.numeric(as.character(s.wuds[, norm.element]))
+   s.wuds[, norm.element] <- as.numeric(as.character(s.wuds[[norm.element]]))
     for (i in data.element){
-      s.wuds[,paste0(i,"_norm")] <- s.wuds[,i] / s.wuds[,norm.element]
+      s.wuds[,paste0(i,"_norm")] <- s.wuds[[i]] / s.wuds[[norm.element]]
     }
   }
   
   # element to be plotted
-  ifelse(is.na(norm.element), p.elem <- data.element, p.elem <- paste0(data.element,"_norm"))
+  p.elem <- ifelse(is.na(norm.element), data.element, paste0(data.element,"_norm"))
+  
   
   if(all(is.na(s.wuds[, p.elem]))) stop('No data available.')
   
   # check for multiple values per station
   
-  
-
   # set common key name "id" to merge water use data with polygon data
-  if (unit.type=="county") {names(s.wuds)[names(s.wuds)=="STATECOUNTYCODE"] <- "id"}
-  if (unit.type=="huc") {names(s.wuds)[names(s.wuds)=="HUCCODE"] <- "id"}
+  if (unit.type=="county") {
+    s.wuds$id <- paste0(s.wuds$FROM_STATE_CD, s.wuds$FROM_COUNTY_CD)
+  }
+  
+  if (unit.type=="huc") {
+    names(s.wuds)[names(s.wuds)=="HUCCODE"] <- "id"
+  }
   
   # merge polygons and water use data 
   hc.subf <- left_join(hc.subf,s.wuds, by="id")
@@ -96,7 +102,9 @@ map_sites <- function(s.wuds, data.element, year, state, norm.element=NA, unit.t
   
   if(all(is.na(s.wuds[p.elem]))) stop('No data available.')
   
-  if (!is.na(norm.element)){p.elem <- paste0(data.elements,"_norm")}
+  if (!is.na(norm.element)){
+    p.elem <- paste0(data.element,"_norm")
+  }
   
   if("COUNTYNAME" %in% names(s.wuds) & !("COUNTYNAME" %in% names(hc.subf))){
     hc.subf <- left_join(hc.subf, s.wuds[,c("STATECOUNTYCODE", "COUNTYNAME")], by=c("id"="STATECOUNTYCODE"))
@@ -116,8 +124,6 @@ map_sites <- function(s.wuds, data.element, year, state, norm.element=NA, unit.t
   hc.subf <- hc.subf[!is.na(hc.subf[,p.elem]),]
   
   
-  
-  
   ch.plot <- ggplot() + geom_polygon(data = hc.subf, 
                                      aes_string(x = "long", y = "lat", 
                                                 group="group", fill= p.elem, label = "labels"),#hc.subf[,p.elem]), 
@@ -131,6 +137,6 @@ map_sites <- function(s.wuds, data.element, year, state, norm.element=NA, unit.t
   print(ch.plot)
   
   
-  return(sites.map)
+  return(ch.plot)
   
 }
