@@ -1,6 +1,6 @@
-#'
-#' timeseriesswuds
+#' timeseriesswuds.R
 #' 
+#' Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
 #' 
 #' @param dec_date is decimate date in fractions of year
 #' 
