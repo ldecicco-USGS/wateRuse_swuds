@@ -39,3 +39,5 @@ VignetteBuilder: knitr
 BugReports: https://github.com/USGS-R/wateruse_swuds/issues
 URL: https://github.com/USGS-R/wateruse_swuds
 RoxygenNote: 6.1.1
+LazyLoad: yes
+LazyData: yes
