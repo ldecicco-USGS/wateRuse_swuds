@@ -33,7 +33,9 @@ Point sizes are scaled to value
 }
 \examples{
 s.wuds <- swudsSample #example data from OHIO
-s.wuds <- s.wuds[which(s.wuds$FROM_SITE_TP_CD == "AS" & s.wuds$YEAR == 2010 &s.wuds$Month_num == 8),]# subset for this example
+# subset for this example
+s.wuds <- s.wuds[which(s.wuds$FROM_SITE_TP_CD == "AS" & 
+                       s.wuds$YEAR == 2010 &s.wuds$Month_num == 8),]
 data.element <- "Volume_mgd"
 state <- "Ohio"
 year <- 2010
