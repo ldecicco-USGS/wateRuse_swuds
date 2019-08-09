@@ -41,9 +41,6 @@
 #' sites.map <- map_sites(s.wuds, data.element, year, state)
 #' data.element <- "JUL_VAL"
 #' norm.element <- "ANNUAL_VAL"
-#' sites.map <- map_sites(s.wuds, data.element, year, state, norm.element)
-#' sites.map
-#' 
 map_sites <- function(s.wuds, data.element, year, state, 
                       norm.element=NA, unit.type="county", site.from.to = 'from'){
   

@@ -3,3 +3,4 @@
 .travis.yml
 DISCLAIMER.md
 load_swuds_retreival_make_swudsSample.R
+man/figures

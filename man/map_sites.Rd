@@ -44,7 +44,4 @@ norm.element <- NA
 sites.map <- map_sites(s.wuds, data.element, year, state)
 data.element <- "JUL_VAL"
 norm.element <- "ANNUAL_VAL"
-sites.map <- map_sites(s.wuds, data.element, year, state, norm.element)
-sites.map
-
 }
