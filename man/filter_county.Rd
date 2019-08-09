@@ -20,5 +20,5 @@ s.wuds <- swudsSample #example data from Ohio
 state_county <- c("Ohio_Madison County", "Ohio_Licking County")
 test_county <- filter_county(s.wuds, state_county)
 
-s.wuds$state_county <- paste(s.wuds$FROM_STATE_NM, s.wuds$FROM_COUNTY_NM, sep = "_")
+
 }

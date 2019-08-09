@@ -9,7 +9,8 @@
 #' @export
 #' @examples
 #' s.wuds <- swudsSample #example data from Ohio
-#' waterType <- "SW"
+#' sum_avg <- "sum"
+#' season <- "Fall"
 #' test_aggSeason <- aggregate_season(s.wuds, season, sum_avg)
 #' 
 aggregate_season<- function(s.wuds, season, sum_avg){

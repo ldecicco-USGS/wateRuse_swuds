@@ -16,7 +16,7 @@ Allows user to filter their water use data from SWUDS by aquifer
 }
 \examples{
 s.wuds <- swudsSample #example data from Ohio
-#aquifer <- TBD
+aquifer <- "TBD"
 test_aquifer <- filter_aquifer(s.wuds, aquifer)
 
 }

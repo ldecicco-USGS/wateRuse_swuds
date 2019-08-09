@@ -18,7 +18,8 @@ Allows user to filter their water use data from SWUDS by season(s)
 }
 \examples{
 s.wuds <- swudsSample #example data from Ohio
-waterType <- "SW"
+sum_avg <- "sum"
+season <- "Fall"
 test_aggSeason <- aggregate_season(s.wuds, season, sum_avg)
 
 }

@@ -6,6 +6,11 @@
 \usage{
 filter_HUC(s.wuds, HUC)
 }
+\arguments{
+\item{s.wuds}{dataframe, the swuds water use data}
+
+\item{HUC}{chr, the HUC of interest to be aggregated}
+}
 \description{
 Allows user to filter their water use data from SWUDS by HUC
 }

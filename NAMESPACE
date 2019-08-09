@@ -2,9 +2,11 @@
 
 export(aggregate_HUC)
 export(aggregate_aquifier)
+export(aggregate_county)
 export(aggregate_month)
 export(aggregate_season)
 export(aggregate_year)
+export(filter_HUC)
 export(filter_aquifer)
 export(filter_category)
 export(filter_county)
