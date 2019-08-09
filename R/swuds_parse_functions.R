@@ -3,7 +3,9 @@
 #' Function to read in SWUDS Water Quantity Excel file into a dataframe
 #' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 #' @param file_path path to Excel file
+#' 
 #' @export
+#' 
 #' @importFrom readxl read_xlsx
 #' @return data frame 
 #' @examples 
@@ -32,6 +34,7 @@ readWaterQuantityXL <- function(file_path){
 #' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 #'
 #' @param file_path path to file
+#' 
 #' @export
 #' @importFrom readxl read_xlsx
 #' @examples 
@@ -61,10 +64,12 @@ readPopServedXL <- function(file_path){
 #' Function to merge Water Quantity and Population Served data frames into one
 #' by "to_agency code", "to_site_no", "Year"
 #'
-#' @export
 #' @param waterQuantDF data frame
 #' @param popServDF data frame
 #' @importFrom dplyr left_join
+#' 
+#' @export
+#' 
 #' @examples 
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
 #' dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
@@ -85,11 +90,13 @@ mergeWaterQuantPopServ <- function(waterQuantDF, popServDF){
 #' Function to create month, year, month#, day, date, decimal date, and water
 #' year to the mergeWaterQuantPopServe data frame
 #'
-#' @export
 #' @param mergeWaterQuantPopServ data frame
 #' @importFrom lubridate decimal_date
+#' @importFrom lubridate days_in_month
 #' @importFrom tidyr gather
-#' 
+#'
+#' @export
+#'   
 #' @examples 
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
 #' dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
@@ -129,8 +136,8 @@ meltWaterQuantPopServ <- function(mergeWaterQuantPopServ){
   df_melt$water_year <- wtr_yr(df_melt$Date)
   
   # repair column names 
-  colnames(df_melt) <- gsub(pattern = '+', replacement = '_', x = colnames(df_melt), fixed = T)
-  colnames(df_melt) <- gsub(pattern = ' ', replacement = '_', x = colnames(df_melt), fixed = T)
+  colnames(df_melt) <- gsub(pattern = '+', replacement = '_', x = colnames(df_melt), fixed = TRUE)
+  colnames(df_melt) <- gsub(pattern = ' ', replacement = '_', x = colnames(df_melt), fixed = TRUE)
   
   # change character "NA" to real NA values
   df_melt$Volume_mgd[df_melt$Volume_mgd=="NA"] <- NA

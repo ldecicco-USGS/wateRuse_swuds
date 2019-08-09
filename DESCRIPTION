@@ -30,6 +30,7 @@ Imports:
     rgeos,
     scales,
     tidyr,
+    lubridate,
     readxl
 Suggests:
     knitr,

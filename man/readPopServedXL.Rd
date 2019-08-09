@@ -7,7 +7,14 @@ and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx}
 \usage{
 readPopServedXL(file_path)
 }
+\arguments{
+\item{file_path}{path to file}
+}
 \description{
 Function to read in SWUDS Population Served Excel file into a dataframe
 and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
+}
+\examples{
+pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
+dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
 }
