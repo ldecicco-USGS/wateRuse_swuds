@@ -1,8 +1,14 @@
-
-
-# Function to read in SWUDS Water Quantity Excel file into a dataframe
-# and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
-#-------------------------
+#' Read Excel file Water Quantity
+#' 
+#' Function to read in SWUDS Water Quantity Excel file into a dataframe
+#' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
+#' @param file_path path to Excel file
+#' @export
+#' @importFrom readxl read_xlsx
+#' @return data frame 
+#' @examples 
+#' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
+#' df <- readWaterQuantityXL(file.path(pathToSample, "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 readWaterQuantityXL <- function(file_path){
   
   dq <- readxl::read_xlsx(path = file_path)
@@ -21,11 +27,14 @@ readWaterQuantityXL <- function(file_path){
   
   return(dq)
 }
-#--------------------------
 
-# Function to read in SWUDS Population Served Excel file into a dataframe
-# and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
-#--------------------------
+#' Function to read in SWUDS Population Served Excel file into a dataframe
+#' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
+#'
+#' @param file_path path to file
+#' @export
+#' @importFrom readxl read_xlsx
+#'  
 readPopServedXL <- function(file_path){
   
   dp <- readxl::read_xlsx(path = file_path)
