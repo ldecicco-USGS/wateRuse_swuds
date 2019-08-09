@@ -45,7 +45,7 @@ readPopServedXL <- function(file_path){
   dp <- readxl::read_xlsx(path = file_path)
   
   # convert column names to NWIS names 
-  nwisLU <- readxl::read_xlsx("./inst/extdata/nwis_lookup.xlsx")
+  nwisLU <- readxl::read_xlsx(file.path(system.file("extdata",package = "wateRuseSWUDS"),"nwis_lookup.xlsx"))
   
   swudcols <- nwisLU$swuds
   NWIScols <- nwisLU$nwis

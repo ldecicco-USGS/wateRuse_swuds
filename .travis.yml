@@ -30,9 +30,18 @@ r_check_args: --as-cran
 
 r_github_packages:
   - jimhester/covr
+  - jimhester/lintr
 
 after_success:
   - if [[ "${R_CODECOV}" ]]; then R -e 'covr::coveralls()'; fi
+  - Rscript -e 'lintr::lint_package()'
+  
+before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
   
 notifications:
   email:
