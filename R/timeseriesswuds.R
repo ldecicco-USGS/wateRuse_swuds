@@ -2,16 +2,11 @@
 #' 
 #' Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
 #' 
-#' @param dec_date is decimate date in fractions of year
-#' 
-#' @param volume_mgd is water-use rate in million gallons per day, monthly and annual
-#' 
-#' @param categories are character categorical attributes defined in your datafile such as 
-#' water-use caragory, state, county, HUC, aquifer, site type, water type, year, month, season, quantile by which data are filtered
-#' 
-#' @param categories.column character that defines which column to use to specify category
-#' 
-#' # old from wateRuse
+#' @param areas is a geographical area as defined in your datafile such as county, HUC, or aquifer
+#' @param data.elements character name of data element within available categories by year for state
+#' @param area.column character that defines which column to use to specify area
+#' @param years vector of integers specifying all years available for state. Defaults to NA which shows all years in dataset.
+#' @param s.wuds dataframe, the swuds water use data
 #' @param y.scale allows R to set the y-axis scale given available data range. Defaults to NA which lets R set the scale based on dataset values.
 #' @param log = TRUE or FALSE allows user to set log scale, default is FALSE
 #' @param plot.points is a logical function to show counties as points or clustered bar graph
@@ -23,16 +18,16 @@
 #' @importFrom tidyr gather_
 #' @importFrom grDevices colorRampPalette
 #' 
-time_series_data <- function(w.use, data.elements, area.column, plot.points = TRUE,
+time_series_data <- function(s.wuds, data.elements, area.column, plot.points = TRUE,
                              years= NA, areas= NA, y.scale=NA, log= FALSE, legend= TRUE,
                              c.palette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")){
 
   data.elements <- data.elements[which(!is.na(data.elements))]
   
   if (all(is.na(areas))){
-    w.use.sub <- w.use[,c("YEAR",area.column,data.elements)]
+    w.use.sub <- s.wuds[,c("YEAR",area.column,data.elements)]
   } else {
-    w.use.sub <-  w.use[w.use[[area.column]] %in% areas, c("YEAR",area.column,data.elements)]
+    w.use.sub <-  s.wuds[s.wuds[[area.column]] %in% areas, c("YEAR",area.column,data.elements)]
   }
   
   if(!any(is.na(years))){
