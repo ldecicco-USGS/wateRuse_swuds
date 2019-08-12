@@ -34,7 +34,8 @@ Imports:
     readxl
 Suggests:
     knitr,
-    testthat
+    testthat,
+    covr
 BuildVignettes: true
 VignetteBuilder: knitr
 BugReports: https://github.com/USGS-R/wateruse_swuds/issues
