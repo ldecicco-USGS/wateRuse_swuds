@@ -1,11 +1,10 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(paste(strwrap(
-    'USGS Support Package: 
+    "USGS Support Package:
     https://owi.usgs.gov/R/packages.html#support
-    
-    Report issues and ask questions:
-    https://github.com/USGS-R/wateRuse/issues'),
-    collapse='\n'))
+    \nReport issues and ask questions:
+    https://github.com/USGS-R/wateRuse/issues"),
+    collapse = "\n"))
 }
 
 #' wateRuseSWUDS

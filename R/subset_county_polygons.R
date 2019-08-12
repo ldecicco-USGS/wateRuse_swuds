@@ -28,18 +28,18 @@
 #' hc.sub <- subset_county_polygons(year, area.column, areas)
 #' hc.sub$NAME
 subset_county_polygons <- function(year, area.column, areas){
-  
-  test.date <- as.Date(paste0(year,"-12-31"))# year of interest converted to date
-  now.date <-format(Sys.Date(), "%Y-%m-%d")
+  # year of interest converted to date
+  test.date <- as.Date(paste0(year, "-12-31"))
+  now.date <- format(Sys.Date(), "%Y-%m-%d")
   # select area of interest
-  hc.sub <- histCounties[which(histCounties@data[,area.column] == areas),]
-  
-  # substitute todays date for the last date of the histCounties dataset (2000-12-31)
-  hc.sub$END_DATE[hc.sub$END_DATE==max(hc.sub$END_DATE)] <- now.date
-  # assuming the counties defined in 2000-12-31 are the same now, use todays 
-  # date to make sure the selection for contemporaneous counties works  
-  hc.sub <- hc.sub[hc.sub$END_DATE >= test.date & hc.sub$START_DATE <= test.date,]# for year of interest, get the counties 
-
+  hc.sub <- histCounties[which(histCounties@data[, area.column] == areas), ]
+  # substitute todays date for the last date
+  # of the histCounties dataset (2000-12-31)
+  hc.sub$END_DATE[hc.sub$END_DATE == max(hc.sub$END_DATE)] <- now.date
+  # assuming the counties defined in 2000-12-31 are the same now, use todays
+  # date to make sure the selection for contemporaneous counties works
+  # for year of interest, get the counties
+  hc.sub <- hc.sub[hc.sub$END_DATE >= test.date &
+                     hc.sub$START_DATE <= test.date, ]
   return(hc.sub)
-  
-}# subset_county_polygons
+}

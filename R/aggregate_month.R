@@ -13,17 +13,17 @@
 #' sum_avg <- "sum"
 #' test_month <- aggregate_month(s.wuds, month, sum_avg)
 #' 
-aggregate_month<- function(s.wuds, month, sum_avg){
-  
+aggregate_month <- function(s.wuds, month, sum_avg){
   s.wuds <- s.wuds[s.wuds$Month %in% month, ]
   s.wuds$Volume_mgd <- as.numeric(s.wuds$Volume_mgd)
-  
-  if(sum_avg == "sum"){
-    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd), by = list(Month = s.wuds$Month), FUN = sum, na.rm = TRUE)
-    
-    
+  if (sum_avg == "sum"){
+    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd),
+                        by = list(Month = s.wuds$Month),
+                        FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd), by = list(Month = s.wuds$Month), FUN = mean, na.rm = TRUE)
+    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd),
+                        by = list(Month = s.wuds$Month),
+                        FUN = mean, na.rm = TRUE)
   }
- 
+  return(s.wuds)
 }

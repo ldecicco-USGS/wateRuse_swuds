@@ -12,13 +12,11 @@
 #' test_category <- filter_category(s.wuds, category)
 #' 
 filter_category <- function(s.wuds, category){
-  
-  if(!("FROM_NAT_WATER_USE_CD" %in% names(s.wuds))){
+
+  if (!("FROM_NAT_WATER_USE_CD" %in% names(s.wuds))){
     stop("FROM_NAT_WATER_USE_CD not in dataset")
   } else {
     s.wuds <- s.wuds[which(s.wuds$FROM_NAT_WATER_USE_CD == category), ]
   }
-  
   return(s.wuds)
-
 }

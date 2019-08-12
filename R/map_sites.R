@@ -41,99 +41,92 @@
 #' sites.map <- map_sites(s.wuds, data.element, year, state)
 #' data.element <- "JUL_VAL"
 #' norm.element <- "ANNUAL_VAL"
-map_sites <- function(s.wuds, data.element, year, state, 
-                      norm.element=NA, unit.type="county", site.from.to = 'from'){
-  
-
-  if(unit.type=="county"){
+map_sites <- function(s.wuds, data.element, year, state,
+                      norm.element=NA, unit.type="county",
+                      site.from.to = "from"){
+  if (unit.type == "county"){
     # get county polygons
     hc.sub <- subset_county_polygons(year, "STATE_TERR", state)
-    hc.subf<-fortify(hc.sub,region = "FIPS")
-    hc.sub@data$id<-hc.sub@data$FIPS
-
-  } else if (unit.type=="huc"){
+    hc.subf <- fortify(hc.sub, region = "FIPS")
+    hc.sub@data$id <- hc.sub@data$FIPS
+  } else if (unit.type == "huc"){
     #get huc polygons
     state <- stateCd$STUSAB[which(stateCd$STATE_NAME == state)]
     hc.sub <- subset_huc_polygons(year, "STATES", state)
-    hc.subf<-fortify(hc.sub,region = "HUC8")
-    hc.sub@data$id<-hc.sub@data$HUC8
-
-  } else if (unit.type=="aquifer"){
+    hc.subf <- fortify(hc.sub, region = "HUC8")
+    hc.sub@data$id <- hc.sub@data$HUC8
+  } else if (unit.type == "aquifer"){
     #get aquifer polygons
   }
-  
-  hc.subf <- left_join(hc.subf,hc.sub@data, by="id")
-  
+  hc.subf <- left_join(hc.subf, hc.sub@data, by = "id")
   # coerce numeric class and normalize if a norm.element is specified
   s.wuds[, data.element] <- as.numeric(s.wuds[[data.element]])
-  
   if (!is.na(norm.element)){
    s.wuds[, norm.element] <- as.numeric(as.character(s.wuds[[norm.element]]))
     for (i in data.element){
-      s.wuds[,paste0(i,"_norm")] <- s.wuds[[i]] / s.wuds[[norm.element]]
+      s.wuds[, paste0(i, "_norm")] <- s.wuds[[i]] / s.wuds[[norm.element]]
     }
   }
-  
   # element to be plotted
-  p.elem <- ifelse(is.na(norm.element), data.element, paste0(data.element,"_norm"))
-  
-  
-  if(all(is.na(s.wuds[, p.elem]))) stop('No data available.')
-  
+  p.elem <- ifelse(is.na(norm.element), data.element,
+                   paste0(data.element, "_norm"))
+  if (all(is.na(s.wuds[, p.elem]))) stop("No data available.")
   # check for multiple values per station
-  
   # set common key name "id" to merge water use data with polygon data
-  if (unit.type=="county") {
+  if (unit.type == "county") {
     s.wuds$id <- paste0(s.wuds$FROM_STATE_CD, s.wuds$FROM_COUNTY_CD)
   }
-  
-  if (unit.type=="huc") {
-    names(s.wuds)[names(s.wuds)=="HUCCODE"] <- "id"
+  if (unit.type == "huc") {
+    names(s.wuds)[names(s.wuds) == "HUCCODE"] <- "id"
   }
-  
-  # merge polygons and water use data 
-  hc.subf <- left_join(hc.subf,s.wuds, by="id")
-  
+  # merge polygons and water use data
+  hc.subf <- left_join(hc.subf, s.wuds, by = "id")
   # plot element
   p.elem <- data.element
-  
-  if(all(is.na(s.wuds[p.elem]))) stop('No data available.')
-  
+  if (all(is.na(s.wuds[p.elem]))) stop("No data available.")
   if (!is.na(norm.element)){
-    p.elem <- paste0(data.element,"_norm")
+    p.elem <- paste0(data.element, "_norm")
   }
-  
-  if("COUNTYNAME" %in% names(s.wuds) & !("COUNTYNAME" %in% names(hc.subf))){
-    hc.subf <- left_join(hc.subf, s.wuds[,c("STATECOUNTYCODE", "COUNTYNAME")], by=c("id"="STATECOUNTYCODE"))
-    hc.subf$labels <- paste("Area:",hc.subf$COUNTYNAME, "\n",p.elem,":",hc.subf[[p.elem]])
-  } else if(unit.type=="county" & "Area.Name" %in% names(s.wuds) & !("Area.Name" %in% names(hc.subf))) {
-    hc.subf <- left_join(hc.subf, s.wuds[,c("STATECOUNTYCODE", "Area.Name")], by=c("id"="STATECOUNTYCODE"))
-    hc.subf$labels <- paste("Area:",hc.subf$Area.Name, "\n",p.elem,":",hc.subf[[p.elem]])
-  } else if(unit.type=="huc" & "Area.Name" %in% names(s.wuds) & !("Area.Name" %in% names(hc.subf))) {
-    hc.subf <- left_join(hc.subf, s.wuds[,c("HUCCODE", "Area.Name")], by=c("id"="HUCCODE"))
-    hc.subf$labels <- paste("Area:",hc.subf$Area.Name, "\n",p.elem,":",hc.subf[[p.elem]])
+  if ("COUNTYNAME" %in% names(s.wuds) & !("COUNTYNAME" %in% names(hc.subf))){
+    hc.subf <- left_join(hc.subf, s.wuds[, c("STATECOUNTYCODE", "COUNTYNAME")],
+                         by = c("id" = "STATECOUNTYCODE"))
+    hc.subf$labels <- paste("Area:", hc.subf$COUNTYNAME, "\n", p.elem, ":",
+                            hc.subf[[p.elem]])
+  } else if (unit.type == "county" &
+             "Area.Name" %in% names(s.wuds) &
+             !("Area.Name" %in% names(hc.subf))) {
+    hc.subf <- left_join(hc.subf, s.wuds[, c("STATECOUNTYCODE", "Area.Name")],
+                         by = c("id" = "STATECOUNTYCODE"))
+    hc.subf$labels <- paste("Area:",
+                            hc.subf$Area.Name,
+                            "\n", p.elem, ":",
+                            hc.subf[[p.elem]])
+  } else if (unit.type == "huc" &
+             "Area.Name" %in% names(s.wuds) &
+             !("Area.Name" %in% names(hc.subf))) {
+    hc.subf <- left_join(hc.subf, s.wuds[, c("HUCCODE", "Area.Name")],
+                         by = c("id" = "HUCCODE"))
+    hc.subf$labels <- paste("Area:",
+                            hc.subf$Area.Name, "\n",
+                            p.elem, ":", hc.subf[[p.elem]])
   } else {
-    hc.subf$labels <- paste("Area:",hc.subf$group, "\n",p.elem,":",hc.subf[[p.elem]])    
+    hc.subf$labels <- paste("Area:",
+                            hc.subf$group, "\n",
+                            p.elem, ":", hc.subf[[p.elem]])
   }
-  
   hc.subf <- hc.subf[order(hc.subf$order), ]
-  hc.subf <- unique(hc.subf[,c("long","lat","group","labels",p.elem)])
-  hc.subf <- hc.subf[!is.na(hc.subf[,p.elem]),]
-  
-  
-  ch.plot <- ggplot() + geom_polygon(data = hc.subf, 
-                                     aes_string(x = "long", y = "lat", 
-                                                group="group", fill= p.elem, label = "labels"),#hc.subf[,p.elem]), 
-                                     color="black", size=0.25) + 
-    coord_quickmap() + 
+  hc.subf <- unique(hc.subf[, c("long", "lat", "group", "labels", p.elem)])
+  hc.subf <- hc.subf[!is.na(hc.subf[, p.elem]), ]
+  ch.plot <- ggplot() +
+    geom_polygon(data = hc.subf,
+                 aes_string(x = "long", y = "lat",
+                            group = "group", fill = p.elem, label = "labels"),
+                            color = "black", size = 0.25) +
+    coord_quickmap() +
     theme_map() +
-    theme(legend.position=c(.8, .2)) +
-    scale_fill_distiller(name=p.elem, palette = "YlGn", 
-                         breaks = pretty_breaks(n = 5), trans = "reverse")
-  
-  print(ch.plot)
-  
-  
+    theme(legend.position = c(.8, .2)) +
+    scale_fill_distiller(name = p.elem, palette = "YlGn",
+                         breaks = pretty_breaks(n = 5),
+                         trans = "reverse")
   return(ch.plot)
-  
 }

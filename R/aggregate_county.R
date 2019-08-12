@@ -15,18 +15,17 @@
 #' test_county <- aggregate_county(s.wuds, state_county, sum_avg)
 #' 
 aggregate_county <- function(s.wuds, state_county, sum_avg){
-  
-  s.wuds$state_county <- paste0(s.wuds$FROM_STATE_CD,s.wuds$FROM_COUNTY_CD)
-  
-  s.wuds <- s.wuds[s.wuds$state_county %in% state_county,]
+  s.wuds$state_county <- paste0(s.wuds$FROM_STATE_CD, s.wuds$FROM_COUNTY_CD)
+  s.wuds <- s.wuds[s.wuds$state_county %in% state_county, ]
   s.wuds$Volume_mgd <- as.numeric(s.wuds$Volume_mgd)
-  
-  if(sum_avg == "sum"){
-    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd), by = list(state_county = s.wuds$state_county), FUN = sum, na.rm = TRUE)
+  if (sum_avg == "sum"){
+    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd),
+                        by = list(state_county = s.wuds$state_county),
+                        FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd), by = list(state_county = s.wuds$state_county), FUN = mean, na.rm = TRUE)
+    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd),
+                        by = list(state_county = s.wuds$state_county),
+                        FUN = mean, na.rm = TRUE)
   }
-  
   return(s.wuds)
-  
 }

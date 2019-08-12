@@ -12,14 +12,11 @@
 #' test_aquifer <- filter_aquifer(s.wuds, aquifer)
 #' 
 filter_aquifer <- function(s.wuds, aquifer){
-  
-  if(!("aquifer" %in% names(s.wuds))){
+  if (!("aquifer" %in% names(s.wuds))){
     message("aquifer not in dataset")
     return(NULL)
   } else {
     s.wuds <- s.wuds[which(s.wuds$aquifer == aquifer), ]
   }
-  
   return(s.wuds)
-  
 }
