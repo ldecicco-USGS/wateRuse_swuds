@@ -17,7 +17,7 @@ readWaterQuantityXL <- function(file_path){
                           guess_max = 2000,
                           na = "NA")
 
-  names(dq)[names(dq) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dq)[names(dq) %in% swudcols], swudcols)]
+  names(dq)[names(dq) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dq)[names(dq) %in% nwisLU$swuds], nwisLU$swuds)]
   
   return(dq)
 }
@@ -37,7 +37,7 @@ readPopServedXL <- function(file_path){
   dp <- readxl::read_xlsx(path = file_path, 
                           guess_max = 2000)
 
-  names(dq)[names(dq) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dq)[names(dq) %in% swudcols], swudcols)]
+  names(dp)[names(dp) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dp)[names(dp) %in% nwisLU$swuds], nwisLU$swuds)]
   
   return(dp)
   
