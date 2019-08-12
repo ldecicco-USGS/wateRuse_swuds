@@ -1,7 +1,7 @@
 library(hexSticker)
 
-outline = "#000080"
-background = "white" 
+outline <- "#000080"
+background <- "white"
 sticker("./man/figures/swuds.png",
         package = "",
         h_fill = background,

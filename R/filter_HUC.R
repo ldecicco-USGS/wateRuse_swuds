@@ -13,12 +13,10 @@
 #' test_HUC <- filter_HUC(s.wuds, HUC)
 #' 
 filter_HUC <- function(s.wuds, HUC){
-  
-  if(!("FROM_HUC_CD" %in% names(s.wuds))){
-    
+  if (!("FROM_HUC_CD" %in% names(s.wuds))){
+    stop("data has no column FROM_HUC_CD")
   } else {
     s.wuds <- s.wuds[which(s.wuds$FROM_HUC_CD == HUC), ]
   }
-  
   return(s.wuds)
 }

@@ -8,7 +8,8 @@ Authors@R: c( person("Robert", "Dudley", role = c("aut", "cre"),
     person("Gary","Martin", role = "aut"),
     person("Jennifer","Shourds", role = "aut"),
     person("Molly","Maupin", role = "ctb"),
-    person("Laura","DeCicco", role = "aut"))
+    person("Laura","DeCicco", role = "aut",
+    comment=c(ORCID="0000-0002-3915-9487")))
 Description: Collection of functions to help parse and analyze AWUDS data.
 License: CC0
 Copyright: This software is in the public domain because it contains materials
@@ -34,7 +35,8 @@ Imports:
     readxl
 Suggests:
     knitr,
-    testthat
+    testthat,
+    covr
 BuildVignettes: true
 VignetteBuilder: knitr
 BugReports: https://github.com/USGS-R/wateruse_swuds/issues

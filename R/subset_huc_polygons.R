@@ -18,11 +18,6 @@
 #' hc.sub <- subset_huc_polygons(year, area.column, areas)
 #' hc.sub$HUCNAME
 subset_huc_polygons <- function(year, area.column, areas){
-
-  #hc.sub <- huc08Poly[which(huc08Poly@data[,area.column] == areas),]
-  
-  hc.sub <- huc08Poly[which(grepl(areas,huc08Poly@data[,area.column])),]
-  
+  hc.sub <- huc08Poly[which(grepl(areas, huc08Poly@data[, area.column])), ]
   return(hc.sub)
-  
-}# subset_huc_polygons
+}

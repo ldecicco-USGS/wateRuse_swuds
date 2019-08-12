@@ -13,5 +13,5 @@
 #' 
 filter_month <- function(s.wuds, month){
   s.wuds <- s.wuds[which(s.wuds$months == month), ]
-  
+  return(s.wuds)
 }

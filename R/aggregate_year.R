@@ -15,16 +15,16 @@
 #' test_year <- aggregate_year(s.wuds, year, sum_avg)
 #' 
 aggregate_year <- function(s.wuds, year, sum_avg){
-  
   s.wuds <- s.wuds[s.wuds$YEAR %in% year, ]
   s.wuds$Volume_mgd <- as.numeric(s.wuds$Volume_mgd)
-  
-  if(sum_avg == "sum"){
-    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd), by = list(Year = s.wuds$YEAR), FUN = sum, na.rm = TRUE)
-    
-    
+  if (sum_avg == "sum"){
+    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd),
+                        by = list(Year = s.wuds$YEAR),
+                        FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd), by = list(Year = s.wuds$YEAR), FUN = mean, na.rm = TRUE)
+    s.wuds <- aggregate(as.numeric(s.wuds$Volume_mgd),
+                        by = list(Year = s.wuds$YEAR),
+                        FUN = mean, na.rm = TRUE)
   }
-  
+  return(s.wuds)
 }
