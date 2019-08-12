@@ -4,26 +4,28 @@
 \alias{subset_huc_polygons}
 \title{subset_huc_polygons}
 \usage{
-subset_huc_polygons(year, area.column, areas)
+subset_huc_polygons(year, area_column, areas)
 }
 \arguments{
-\item{year}{int, the year of interest to be mapped (defines historical basis for HUCs)}
+\item{year}{int, the year of interest to be mapped
+(defines historical basis for HUCs)}
 
-\item{area.column}{chr, defines which column the areas refer to for subsetting}
+\item{area_column}{chr, defines which column the areas
+refer to for subsetting}
 
 \item{areas}{chr, vector of codes indicating area of interest to subset on}
 }
 \value{
-hc.sub dataframe, a subset of HUC polygon data
+hc_sub dataframe, a subset of HUC polygon data
 }
 \description{
 Returns HUC polygons 
 Dataset is subset on basis of area of interest
 }
 \examples{
-areas <- "ME" # 21 HUC8s in Maine 
-area.column <- "STATES"
-year <- 1995 
-hc.sub <- subset_huc_polygons(year, area.column, areas)
-hc.sub$HUCNAME
+areas <- "ME" # 21 HUC8s in Maine
+area_column <- "STATES"
+year <- 1995
+hc_sub <- subset_huc_polygons(year, area_column, areas)
+hc_sub$HUCNAME
 }

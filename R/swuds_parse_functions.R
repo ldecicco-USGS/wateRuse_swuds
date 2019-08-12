@@ -3,12 +3,10 @@
 #' Function to read in SWUDS Water Quantity Excel file into a dataframe
 #' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 #' @param file_path path to Excel file
-#' 
 #' @export
-#' 
 #' @importFrom readxl read_xlsx
 #' @return data frame 
-#' @examples 
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
 #' df <- read_swuds_quant(file.path(pathToSample, "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 read_swuds_quant <- function(file_path){
@@ -26,10 +24,9 @@ read_swuds_quant <- function(file_path){
 #' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 #'
 #' @param file_path path to file
-#' 
 #' @export
 #' @importFrom readxl read_xlsx
-#' @examples 
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
 #' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 read_swuds_pop <- function(file_path){
@@ -50,10 +47,8 @@ read_swuds_pop <- function(file_path){
 #' @param dq data frame
 #' @param dp data frame
 #' @importFrom dplyr left_join
-#' 
 #' @export
-#' 
-#' @examples 
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
 #' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 #' dq <- read_swuds_quant(file.path(pathToSample,
@@ -75,10 +70,8 @@ merge_dq_dp <- function(dq, dp){
 #' @importFrom lubridate decimal_date
 #' @importFrom lubridate days_in_month
 #' @importFrom tidyr gather
-#'
 #' @export
-#'   
-#' @examples 
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
 #' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 #' dq <- read_swuds_quant(file.path(pathToSample,

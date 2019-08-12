@@ -14,7 +14,7 @@ subset_county_polygons(year, area.column, areas)
 \item{areas}{chr, vector of codes indicating HUCs, counties, states, regions, aquifers, etc.}
 }
 \value{
-hc.sub dataframe, a subset of county polygon data
+hc_sub dataframe, a subset of county polygon data
 }
 \description{
 Returns county polygons from: Siczewicz, Peter. U.S. Historical Counties 
@@ -24,16 +24,15 @@ Dataset is subset on basis of area of interest
 \examples{
 areas <- "Delaware" # 3 counties present day
 area.column <- "STATE_TERR"
-year <- 2010 
-hc.sub <- subset_county_polygons(year, area.column, areas)
-hc.sub$NAME
-
+year <- 2010
+hc_sub <- subset_county_polygons(year, area.column, areas)
+hc_sub$NAME
 areas <- "Maine" # 16 counties present day
 area.column <- "STATE_TERR"
 year <- 2010 
-hc.sub <- subset_county_polygons(year, area.column, areas)
-hc.sub$NAME
+hc_sub <- subset_county_polygons(year, area.column, areas)
+hc_sub$NAME
 year <- 1850 # Maine had 13 counties in 1850; Delaware 3
-hc.sub <- subset_county_polygons(year, area.column, areas)
-hc.sub$NAME
+hc_sub <- subset_county_polygons(year, area.column, areas)
+hc_sub$NAME
 }

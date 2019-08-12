@@ -4,15 +4,13 @@
 \alias{time_series_data}
 \title{timeseriesswuds.R}
 \usage{
-time_series_data(s_wuds, data.elements, area.column, plot.points = TRUE,
-  years = NA, areas = NA, y.scale = NA, log = FALSE,
+time_series_data(s_wuds, dataelements, area.column, plot.points = TRUE,
+  years = NA, areas = NA, y_scale = NA, log = FALSE,
   legend = TRUE, c_palette = c("#999999", "#E69F00", "#56B4E9",
   "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"))
 }
 \arguments{
 \item{s_wuds}{dataframe, the swuds water use data}
-
-\item{data.elements}{character name of data element within available categories by year for state}
 
 \item{area.column}{character that defines which column to use to specify area}
 
@@ -22,13 +20,15 @@ time_series_data(s_wuds, data.elements, area.column, plot.points = TRUE,
 
 \item{areas}{is a geographical area as defined in your datafile such as county, HUC, or aquifer}
 
-\item{y.scale}{allows R to set the y-axis scale given available data range. Defaults to NA which lets R set the scale based on dataset values.}
+\item{y_scale}{allows R to set the y-axis scale given available data range. Defaults to NA which lets R set the scale based on dataset values.}
 
 \item{log}{= TRUE or FALSE allows user to set log scale, default is FALSE}
 
 \item{legend}{is a logical function to include list of counties in a legend if manageable, default is TRUE}
 
 \item{c_palette}{color palette to use for points or bars}
+
+\item{data_elements}{character name of data element within available categories by year for state}
 }
 \description{
 Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
