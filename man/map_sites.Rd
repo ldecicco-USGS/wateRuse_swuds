@@ -5,7 +5,7 @@
 \title{map_sites}
 \usage{
 map_sites(s.wuds, data.element, year, state, norm.element = NA,
-  unit.type = "county", site.from.to = "from")
+  unit.type = "county", site_from_to = "from")
 }
 \arguments{
 \item{s.wuds}{dataframe, the swuds water use data}
@@ -20,7 +20,7 @@ map_sites(s.wuds, data.element, year, state, norm.element = NA,
 
 \item{unit.type}{chr, type of unit to be mapped; acceptable options are "county", "huc", or "aquifer"}
 
-\item{site.from.to}{chr, either 'from' or 'to' to designate the site lats-lons to use; the 'from' site or the 'to' site}
+\item{site_from_to}{chr, either 'from' or 'to' to designate the site lats-lons to use; the 'from' site or the 'to' site}
 }
 \description{
 Returns map of data element mapped by sites that have lat-lons 
@@ -32,7 +32,7 @@ Dataframe must not have more than one row per site ID
 Point sizes are scaled to value
 }
 \examples{
-s.wuds <- swudsSample #example data from OHIO
+s.wuds <- swuds_sample #example data from OHIO
 # subset for this example
 s.wuds <- s.wuds[which(s.wuds$FROM_SITE_TP_CD == "AS" & 
                        s.wuds$YEAR == 2010 &s.wuds$Month_num == 8),]

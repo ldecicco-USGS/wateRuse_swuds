@@ -8,7 +8,7 @@
 #' 
 #' @export
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' HUC <- c("041000040104", "050600020105")
 #' sum_avg <- "sum"
 #' test_HUC <- aggregate_HUC(s.wuds, HUC, sum_avg)

@@ -9,7 +9,7 @@
 #' @export
 #'  
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' year <- c("1995", "2004")
 #' sum_avg <- "sum"
 #' test_year <- aggregate_year(s.wuds, year, sum_avg)

@@ -8,7 +8,7 @@
 #' 
 #' @export
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' month <- c("Jan", "Feb")
 #' sum_avg <- "sum"
 #' test_month <- aggregate_month(s.wuds, month, sum_avg)

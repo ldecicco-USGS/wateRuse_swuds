@@ -7,7 +7,7 @@
 #' 
 #' @export
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' aquifer <- "TBD"
 #' test_aquifer <- filter_aquifer(s.wuds, aquifer)
 #' 

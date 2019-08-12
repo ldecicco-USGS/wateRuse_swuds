@@ -32,8 +32,8 @@ NULL
 #'
 #' Example dump file read in as RData format.
 #'
-#' @name swudsSample
-#' @rdname swudsSample
+#' @name swuds_sample
+#' @rdname swuds_sample
 #' @examples 
-#' head(swudsSample)
+#' head(swuds_sample)
 NULL

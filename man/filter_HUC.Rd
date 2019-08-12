@@ -15,7 +15,7 @@ filter_HUC(s.wuds, HUC)
 Allows user to filter their water use data from SWUDS by HUC
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s.wuds <- swuds_sample #example data from Ohio
 HUC <- c("041000040104", "050600020105")
 test_HUC <- filter_HUC(s.wuds, HUC)
 

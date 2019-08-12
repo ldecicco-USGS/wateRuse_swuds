@@ -17,7 +17,7 @@ aggregate_month(s.wuds, month, sum_avg)
 Allows user to aggregate their data from SWUDS by user-defined month(s)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s.wuds <- swuds_sample #example data from Ohio
 month <- c("Jan", "Feb")
 sum_avg <- "sum"
 test_month <- aggregate_month(s.wuds, month, sum_avg)

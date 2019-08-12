@@ -7,7 +7,7 @@
 #' 
 #' @export
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' category <- c("WS", "IR", "IN")
 #' test_category <- filter_category(s.wuds, category)
 #' 

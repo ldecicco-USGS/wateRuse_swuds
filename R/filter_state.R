@@ -8,7 +8,7 @@
 #' @export
 #' 
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' state <- c("Ohio")
 #' test_state <- filter_state(s.wuds, state)
 #' 

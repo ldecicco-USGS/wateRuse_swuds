@@ -15,7 +15,7 @@ filter_month(s.wuds, month)
 Allows user to filter their water use data from SWUDS by month(s)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s.wuds <- swuds_sample #example data from Ohio
 month <- c("Jan", "Feb")
 test_month <- filter_month(s.wuds, month)
 

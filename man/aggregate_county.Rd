@@ -18,7 +18,7 @@ appended to the beginning of the county}
 Allows user to aggregate their data from SWUDS by user-defined county(ies)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s.wuds <- swuds_sample #example data from Ohio
 state_county <- "39033"
 sum_avg <- "sum"
 test_county <- aggregate_county(s.wuds, state_county, sum_avg)

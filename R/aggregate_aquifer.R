@@ -9,7 +9,7 @@
 #' @export
 #' @importFrom stats aggregate
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' aquifer <- "TBD"
 #' sum_avg <- "sum"
 #' test_aquifer <- aggregate_aquifier(s.wuds, aquifer, sum_avg)

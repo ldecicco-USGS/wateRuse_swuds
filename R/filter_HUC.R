@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' s.wuds <- swudsSample #example data from Ohio
+#' s.wuds <- swuds_sample #example data from Ohio
 #' HUC <- c("041000040104", "050600020105")
 #' test_HUC <- filter_HUC(s.wuds, HUC)
 #' 

@@ -14,7 +14,7 @@
 #' @param state character name of state
 #' @param norm.element chr, element used to normalize data.element 
 #' @param unit.type chr, type of unit to be mapped; acceptable options are "county", "huc", or "aquifer"
-#' @param site.from.to chr, either 'from' or 'to' to designate the site lats-lons to use; the 'from' site or the 'to' site
+#' @param site_from_to chr, either 'from' or 'to' to designate the site lats-lons to use; the 'from' site or the 'to' site
 #'  
 #' @export
 #' 
@@ -29,7 +29,7 @@
 #' @importFrom scales pretty_breaks
 #' 
 #' @examples 
-#' s.wuds <- swudsSample #example data from OHIO
+#' s.wuds <- swuds_sample #example data from OHIO
 #' # subset for this example
 #' s.wuds <- s.wuds[which(s.wuds$FROM_SITE_TP_CD == "AS" & 
 #'                        s.wuds$YEAR == 2010 &s.wuds$Month_num == 8),]
@@ -43,7 +43,7 @@
 #' norm.element <- "ANNUAL_VAL"
 map_sites <- function(s.wuds, data.element, year, state,
                       norm.element=NA, unit.type="county",
-                      site.from.to = "from"){
+                      site_from_to = "from"){
   if (unit.type == "county"){
     # get county polygons
     hc.sub <- subset_county_polygons(year, "STATE_TERR", state)

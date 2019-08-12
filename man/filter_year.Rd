@@ -15,7 +15,7 @@ filter_year(s.wuds, year)
 Allows user to filter their water use data from SWUDS by year(s)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s.wuds <- swuds_sample #example data from Ohio
 year <- c("1995", "2009", "2012")
 test_year <- filter_year(s.wuds, year)
 
