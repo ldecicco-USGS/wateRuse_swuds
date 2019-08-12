@@ -4,10 +4,10 @@
 \alias{filter_water_type}
 \title{filter_water_type}
 \usage{
-filter_water_type(s.wuds, water_type)
+filter_water_type(s_wuds, water_type)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{water_type}{chr, the water type of interest to be filtered}
 }
@@ -15,7 +15,7 @@ filter_water_type(s.wuds, water_type)
 Allows user to filter their water use data from SWUDS by water type(s)
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 water_type <- "SW"
-test_water_type <- filter_water_type(s.wuds, water_type)
+test_water_type <- filter_water_type(s_wuds, water_type)
 }

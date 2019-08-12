@@ -4,10 +4,10 @@
 \alias{filter_county}
 \title{filter_county}
 \usage{
-filter_county(s.wuds, state_county)
+filter_county(s_wuds, state_county)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{state_county}{chr, the county of interested to be filtered. The state abb is appended to
 the front of the county name}
@@ -16,9 +16,9 @@ the front of the county name}
 Allows user to filter their water use data from SWUDS by county
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 state_county <- c("Ohio_Madison County", "Ohio_Licking County")
-test_county <- filter_county(s.wuds, state_county)
+test_county <- filter_county(s_wuds, state_county)
 
 
 }

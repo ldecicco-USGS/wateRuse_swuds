@@ -4,10 +4,10 @@
 \alias{aggregate_HUC}
 \title{aggregate_HUC}
 \usage{
-aggregate_HUC(s.wuds, HUC, sum_avg)
+aggregate_HUC(s_wuds, HUC, sum_avg)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{HUC}{chr, the HUC of interest to be aggregated}
 
@@ -17,8 +17,8 @@ aggregate_HUC(s.wuds, HUC, sum_avg)
 Allows user to aggregate their data from SWUDS by user-defined HUC(S)
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 HUC <- c("041000040104", "050600020105")
 sum_avg <- "sum"
-test_HUC <- aggregate_HUC(s.wuds, HUC, sum_avg)
+test_HUC <- aggregate_HUC(s_wuds, HUC, sum_avg)
 }

@@ -4,10 +4,10 @@
 \alias{filter_month}
 \title{filter_month}
 \usage{
-filter_month(s.wuds, month)
+filter_month(s_wuds, month)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{month}{chr, the month of interest to be filtered in abb format (e.g. Jan, Feb, etc.)}
 }
@@ -15,8 +15,8 @@ filter_month(s.wuds, month)
 Allows user to filter their water use data from SWUDS by month(s)
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 month <- c("Jan", "Feb")
-test_month <- filter_month(s.wuds, month)
+test_month <- filter_month(s_wuds, month)
 
 }

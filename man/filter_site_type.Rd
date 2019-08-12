@@ -4,10 +4,10 @@
 \alias{filter_site_type}
 \title{filter_site_type}
 \usage{
-filter_site_type(s.wuds, site_type)
+filter_site_type(s_wuds, site_type)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{site_type}{chr, the site type of intesitest to be filtered}
 }
@@ -15,8 +15,8 @@ filter_site_type(s.wuds, site_type)
 Allows user to filter their water use data from SWUDS by site type(s)
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 site_type <- c("AS", "FA-DV")
-test_site_type <- filter_site_type(s.wuds, site_type)
+test_site_type <- filter_site_type(s_wuds, site_type)
 
 }

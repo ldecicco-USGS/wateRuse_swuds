@@ -4,10 +4,10 @@
 \alias{filter_state}
 \title{filter_state}
 \usage{
-filter_state(s.wuds, state)
+filter_state(s_wuds, state)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{state}{chr, the state of interest to be filtered}
 }
@@ -15,8 +15,8 @@ filter_state(s.wuds, state)
 Allows user to filter their water use data from SWUDS by state(s)
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 state <- c("Ohio")
-test_state <- filter_state(s.wuds, state)
+test_state <- filter_state(s_wuds, state)
 
 }

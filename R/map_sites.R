@@ -2,13 +2,13 @@
 #'
 #' Returns map of data element mapped by sites that have lat-lons 
 #' Only works with one data element as currently written
-#' Assumes the s.wuds dataframe being used as input has already been subsetted 
+#' Assumes the s_wuds dataframe being used as input has already been subsetted 
 #' using filter functions (by site type, state, or county, years, etc.)
 #' that is, no subsetting is done inside this function
 #' Dataframe must not have more than one row per site ID
 #' Point sizes are scaled to value
 #' 
-#' @param s.wuds dataframe, the swuds water use data 
+#' @param s_wuds dataframe, the swuds water use data 
 #' @param data.element chr, data element to be plotted 
 #' @param year int, the year of interest to be mapped (defines historical basis for counties)
 #' @param state character name of state
@@ -29,19 +29,19 @@
 #' @importFrom scales pretty_breaks
 #' 
 #' @examples 
-#' s.wuds <- swuds_sample #example data from OHIO
+#' s_wuds <- swuds_sample #example data from OHIO
 #' # subset for this example
-#' s.wuds <- s.wuds[which(s.wuds$FROM_SITE_TP_CD == "AS" & 
-#'                        s.wuds$YEAR == 2010 &s.wuds$Month_num == 8),]
+#' s_wuds <- s_wuds[which(s_wuds$FROM_SITE_TP_CD == "AS" & 
+#'                        s_wuds$YEAR == 2010 &s_wuds$Month_num == 8),]
 #' data.element <- "Volume_mgd"
 #' state <- "Ohio"
 #' year <- 2010
 #' unit.type <- "county"
 #' norm.element <- NA
-#' sites.map <- map_sites(s.wuds, data.element, year, state)
+#' sites.map <- map_sites(s_wuds, data.element, year, state)
 #' data.element <- "JUL_VAL"
 #' norm.element <- "ANNUAL_VAL"
-map_sites <- function(s.wuds, data.element, year, state,
+map_sites <- function(s_wuds, data.element, year, state,
                       norm.element=NA, unit.type="county",
                       site_from_to = "from"){
   if (unit.type == "county"){
@@ -60,51 +60,51 @@ map_sites <- function(s.wuds, data.element, year, state,
   }
   hc.subf <- left_join(hc.subf, hc.sub@data, by = "id")
   # coerce numeric class and normalize if a norm.element is specified
-  s.wuds[, data.element] <- as.numeric(s.wuds[[data.element]])
+  s_wuds[, data.element] <- as.numeric(s_wuds[[data.element]])
   if (!is.na(norm.element)){
-   s.wuds[, norm.element] <- as.numeric(as.character(s.wuds[[norm.element]]))
+   s_wuds[, norm.element] <- as.numeric(as.character(s_wuds[[norm.element]]))
     for (i in data.element){
-      s.wuds[, paste0(i, "_norm")] <- s.wuds[[i]] / s.wuds[[norm.element]]
+      s_wuds[, paste0(i, "_norm")] <- s_wuds[[i]] / s_wuds[[norm.element]]
     }
   }
   # element to be plotted
   p.elem <- ifelse(is.na(norm.element), data.element,
                    paste0(data.element, "_norm"))
-  if (all(is.na(s.wuds[, p.elem]))) stop("No data available.")
+  if (all(is.na(s_wuds[, p.elem]))) stop("No data available.")
   # check for multiple values per station
   # set common key name "id" to merge water use data with polygon data
   if (unit.type == "county") {
-    s.wuds$id <- paste0(s.wuds$FROM_STATE_CD, s.wuds$FROM_COUNTY_CD)
+    s_wuds$id <- paste0(s_wuds$FROM_STATE_CD, s_wuds$FROM_COUNTY_CD)
   }
   if (unit.type == "huc") {
-    names(s.wuds)[names(s.wuds) == "HUCCODE"] <- "id"
+    names(s_wuds)[names(s_wuds) == "HUCCODE"] <- "id"
   }
   # merge polygons and water use data
-  hc.subf <- left_join(hc.subf, s.wuds, by = "id")
+  hc.subf <- left_join(hc.subf, s_wuds, by = "id")
   # plot element
   p.elem <- data.element
-  if (all(is.na(s.wuds[p.elem]))) stop("No data available.")
+  if (all(is.na(s_wuds[p.elem]))) stop("No data available.")
   if (!is.na(norm.element)){
     p.elem <- paste0(data.element, "_norm")
   }
-  if ("COUNTYNAME" %in% names(s.wuds) & !("COUNTYNAME" %in% names(hc.subf))){
-    hc.subf <- left_join(hc.subf, s.wuds[, c("STATECOUNTYCODE", "COUNTYNAME")],
+  if ("COUNTYNAME" %in% names(s_wuds) & !("COUNTYNAME" %in% names(hc.subf))){
+    hc.subf <- left_join(hc.subf, s_wuds[, c("STATECOUNTYCODE", "COUNTYNAME")],
                          by = c("id" = "STATECOUNTYCODE"))
     hc.subf$labels <- paste("Area:", hc.subf$COUNTYNAME, "\n", p.elem, ":",
                             hc.subf[[p.elem]])
   } else if (unit.type == "county" &
-             "Area.Name" %in% names(s.wuds) &
+             "Area.Name" %in% names(s_wuds) &
              !("Area.Name" %in% names(hc.subf))) {
-    hc.subf <- left_join(hc.subf, s.wuds[, c("STATECOUNTYCODE", "Area.Name")],
+    hc.subf <- left_join(hc.subf, s_wuds[, c("STATECOUNTYCODE", "Area.Name")],
                          by = c("id" = "STATECOUNTYCODE"))
     hc.subf$labels <- paste("Area:",
                             hc.subf$Area.Name,
                             "\n", p.elem, ":",
                             hc.subf[[p.elem]])
   } else if (unit.type == "huc" &
-             "Area.Name" %in% names(s.wuds) &
+             "Area.Name" %in% names(s_wuds) &
              !("Area.Name" %in% names(hc.subf))) {
-    hc.subf <- left_join(hc.subf, s.wuds[, c("HUCCODE", "Area.Name")],
+    hc.subf <- left_join(hc.subf, s_wuds[, c("HUCCODE", "Area.Name")],
                          by = c("id" = "HUCCODE"))
     hc.subf$labels <- paste("Area:",
                             hc.subf$Area.Name, "\n",

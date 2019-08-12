@@ -4,10 +4,10 @@
 \alias{aggregate_month}
 \title{aggregate_month}
 \usage{
-aggregate_month(s.wuds, month, sum_avg)
+aggregate_month(s_wuds, month, sum_avg)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{month}{chr, the month of interest to be aggregated in abb format (i.e. Jan, Feb, etc.)}
 
@@ -17,9 +17,9 @@ aggregate_month(s.wuds, month, sum_avg)
 Allows user to aggregate their data from SWUDS by user-defined month(s)
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 month <- c("Jan", "Feb")
 sum_avg <- "sum"
-test_month <- aggregate_month(s.wuds, month, sum_avg)
+test_month <- aggregate_month(s_wuds, month, sum_avg)
 
 }

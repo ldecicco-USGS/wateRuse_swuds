@@ -4,10 +4,10 @@
 \alias{aggregate_county}
 \title{aggregate_county}
 \usage{
-aggregate_county(s.wuds, state_county, sum_avg)
+aggregate_county(s_wuds, state_county, sum_avg)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{state_county}{chr, the county of interest to be aggregated. State abbreviation is also
 appended to the beginning of the county}
@@ -18,9 +18,9 @@ appended to the beginning of the county}
 Allows user to aggregate their data from SWUDS by user-defined county(ies)
 }
 \examples{
-s.wuds <- swuds_sample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 state_county <- "39033"
 sum_avg <- "sum"
-test_county <- aggregate_county(s.wuds, state_county, sum_avg)
+test_county <- aggregate_county(s_wuds, state_county, sum_avg)
 
 }
