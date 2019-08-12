@@ -26,7 +26,7 @@ r_github_packages:
   - jimhester/lintr
 
 after_success:
-  - Rscript -e 'covr::coveralls()'
+  - Rscript -e 'covr::codecov()'
   - Rscript -e 'lintr::lint_package()'
   
 before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
