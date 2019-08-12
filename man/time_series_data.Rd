@@ -2,15 +2,25 @@
 % Please edit documentation in R/timeseriesswuds.R
 \name{time_series_data}
 \alias{time_series_data}
-\title{timeseriesswuds}
+\title{timeseriesswuds.R}
 \usage{
-time_series_data(w.use, data.elements, area.column, plot.points = TRUE,
+time_series_data(s.wuds, data.elements, area.column, plot.points = TRUE,
   years = NA, areas = NA, y.scale = NA, log = FALSE,
   legend = TRUE, c.palette = c("#999999", "#E69F00", "#56B4E9",
   "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"))
 }
 \arguments{
+\item{s.wuds}{dataframe, the swuds water use data}
+
+\item{data.elements}{character name of data element within available categories by year for state}
+
+\item{area.column}{character that defines which column to use to specify area}
+
 \item{plot.points}{is a logical function to show counties as points or clustered bar graph}
+
+\item{years}{vector of integers specifying all years available for state. Defaults to NA which shows all years in dataset.}
+
+\item{areas}{is a geographical area as defined in your datafile such as county, HUC, or aquifer}
 
 \item{y.scale}{allows R to set the y-axis scale given available data range. Defaults to NA which lets R set the scale based on dataset values.}
 
@@ -19,18 +29,7 @@ time_series_data(w.use, data.elements, area.column, plot.points = TRUE,
 \item{legend}{is a logical function to include list of counties in a legend if manageable, default is TRUE}
 
 \item{c.palette}{color palette to use for points or bars}
-
-\item{dec_date}{is decimate date in fractions of year}
-
-\item{volume_mgd}{is water-use rate in million gallons per day, monthly and annual}
-
-\item{categories}{are character categorical attributes defined in your datafile such as 
-water-use caragory, state, county, HUC, aquifer, site type, water type, year, month, season, quantile by which data are filtered}
-
-\item{categories.column}{character that defines which column to use to specify category
-
-# old from wateRuse}
 }
 \description{
-timeseriesswuds
+Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
 }

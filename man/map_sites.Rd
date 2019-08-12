@@ -41,10 +41,7 @@ state <- "Ohio"
 year <- 2010
 unit.type <- "county"
 norm.element <- NA
-sites.map <- map_sites(s.wuds, data.element, norm.element)
+sites.map <- map_sites(s.wuds, data.element, year, state)
 data.element <- "JUL_VAL"
 norm.element <- "ANNUAL_VAL"
-sites.map <- map_sites(s.wuds, data.element, norm.element)
-sites.map
-
 }

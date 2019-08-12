@@ -8,9 +8,18 @@
 #' @export
 #' @examples
 #' s.wuds <- swudsSample #example data from Ohio
-#' #aquifer <- TBD
+#' aquifer <- "TBD"
 #' test_aquifer <- filter_aquifer(s.wuds, aquifer)
 #' 
 filter_aquifer <- function(s.wuds, aquifer){
-  s.wuds <- s.wuds[which(s.wuds$aquifer == aquifer), ]
+  
+  if(!("aquifer" %in% names(s.wuds))){
+    message("aquifer not in dataset")
+    return(NULL)
+  } else {
+    s.wuds <- s.wuds[which(s.wuds$aquifer == aquifer), ]
+  }
+  
+  return(s.wuds)
+  
 }

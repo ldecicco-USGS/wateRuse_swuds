@@ -6,6 +6,8 @@
 #' @param year numeric, the year of interest to be aggregated
 #' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
 #' 
+#' @export
+#'  
 #' @examples
 #' s.wuds <- swudsSample #example data from Ohio
 #' year <- c("1995", "2004")

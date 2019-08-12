@@ -1,4 +1,31 @@
-# wateRuseSWUDS
+# wateRuseSWUDS <img src="man/figures/logo.png" alt="toxEval" height="150px" align="right" />
+
+[![travis](https://travis-ci.org/USGS-R/wateRuse_swuds.svg?branch=master)](https://travis-ci.org/USGS-R/wateRuse_swuds) [![Coverage Status](https://coveralls.io/repos/github/USGS-R/wateRuse_swuds/badge.svg?branch=master)](https://coveralls.io/github/USGS-R/wateRuse_swuds?branch=master) [![status](https://img.shields.io/badge/USGS-Support-yellow.svg)](https://owi.usgs.gov/R/packages.html#support)  
+
+## Setup data
+
+```r
+pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
+
+# Read in the water quantity table
+dq <- readWaterQuantityXL(file.path(pathToSample,"OH_CTF_SW_monthly_permit_sample_data.xlsx"))
+
+# Read in the population served table
+dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
+
+# merge the tables
+df <- mergeWaterQuantPopServ(waterQuantDF = dq, popServDF = dp)
+
+#melt the table
+df_melt <- meltWaterQuantPopServ(mergeWaterQuantPopServ = df)
+```
+
+## Pull requests
+
+
+- Please run `lintr::lint_package()` before submitting a pull request.  
+- consider running `goodpractice::gp()` on the package before contributing.
+
 
 ## Disclaimer
 

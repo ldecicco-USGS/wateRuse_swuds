@@ -12,7 +12,11 @@
 #' state_county <- c("Ohio_Madison County", "Ohio_Licking County")
 #' test_county <- filter_county(s.wuds, state_county)
 #' 
-#' s.wuds$state_county <- paste(s.wuds$FROM_STATE_NM, s.wuds$FROM_COUNTY_NM, sep = "_")
+#' 
 filter_county <- function(s.wuds, state_county){
+  
+  s.wuds$state_county <- paste(s.wuds$FROM_STATE_NM, s.wuds$FROM_COUNTY_NM, sep = "_")
   s.wuds <- s.wuds[which(s.wuds$state_county == state_county), ]
+  
+  return(s.wuds)
 }

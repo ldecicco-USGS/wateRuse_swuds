@@ -2,6 +2,7 @@
   packageStartupMessage(paste(strwrap(
     'USGS Support Package: 
     https://owi.usgs.gov/R/packages.html#support
+    
     Report issues and ask questions:
     https://github.com/USGS-R/wateRuse/issues'),
     collapse='\n'))

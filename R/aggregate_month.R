@@ -6,6 +6,7 @@
 #' @param month chr, the month of interest to be aggregated in abb format (i.e. Jan, Feb, etc.)
 #' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
 #' 
+#' @export
 #' @examples
 #' s.wuds <- swudsSample #example data from Ohio
 #' month <- c("Jan", "Feb")
