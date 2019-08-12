@@ -8,7 +8,7 @@
 #' Dataframe must not have more than one row per site ID
 #' Point sizes are scaled to value
 #' 
-#' @param s_wuds dataframe, the swuds water use data 
+#' @param s_wuds dataframe, the swuds water use data
 #' @param data.element chr, data element to be plotted 
 #' @param year int, the year of interest to be mapped (defines historical basis for counties)
 #' @param state character name of state

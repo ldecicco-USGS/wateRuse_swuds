@@ -17,7 +17,6 @@
 #' @import ggplot2
 #' @importFrom tidyr gather_
 #' @importFrom grDevices colorRampPalette
-#' 
 time_series_data <- function(s_wuds, data.elements, area.column,
                              plot.points = TRUE,
                              years= NA, areas= NA,

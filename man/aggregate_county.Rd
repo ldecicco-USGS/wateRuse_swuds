@@ -9,7 +9,8 @@ aggregate_county(s_wuds, state_county, sum_avg)
 \arguments{
 \item{s_wuds}{dataframe, the swuds water use data}
 
-\item{state_county}{chr, the county of interest to be aggregated. State abbreviation is also
+\item{state_county}{chr, the county of interest to be aggregated.
+State abbreviation is also
 appended to the beginning of the county}
 
 \item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
@@ -22,5 +23,4 @@ s_wuds <- swuds_sample #example data from Ohio
 state_county <- "39033"
 sum_avg <- "sum"
 test_county <- aggregate_county(s_wuds, state_county, sum_avg)
-
 }

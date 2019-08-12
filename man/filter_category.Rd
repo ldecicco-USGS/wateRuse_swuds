@@ -18,5 +18,4 @@ Allows user to filter their water use data from SWUDS by category
 s_wuds <- swuds_sample #example data from Ohio
 category <- c("WS", "IR", "IN")
 test_category <- filter_category(s_wuds, category)
-
 }

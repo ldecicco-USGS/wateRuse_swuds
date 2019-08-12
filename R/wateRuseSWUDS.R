@@ -34,6 +34,6 @@ NULL
 #'
 #' @name swuds_sample
 #' @rdname swuds_sample
-#' @examples 
+#' @examples
 #' head(swuds_sample)
 NULL

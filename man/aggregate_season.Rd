@@ -21,5 +21,4 @@ s_wuds <- swuds_sample #example data from Ohio
 sum_avg <- "sum"
 season <- "Fall"
 test_aggSeason <- aggregate_season(s_wuds, season, sum_avg)
-
 }

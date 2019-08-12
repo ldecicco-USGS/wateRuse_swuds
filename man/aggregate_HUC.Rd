@@ -11,7 +11,8 @@ aggregate_HUC(s_wuds, HUC, sum_avg)
 
 \item{HUC}{chr, the HUC of interest to be aggregated}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
+\item{sum_avg}{chr, user selects either "sum" or "avg" and
+the sum or average will be computed}
 }
 \description{
 Allows user to aggregate their data from SWUDS by user-defined HUC(S)

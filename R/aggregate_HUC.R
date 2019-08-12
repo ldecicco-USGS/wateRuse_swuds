@@ -2,10 +2,10 @@
 #'
 #' Allows user to aggregate their data from SWUDS by user-defined HUC(S)
 #'
-#' @param s_wuds dataframe, the swuds water use data 
+#' @param s_wuds dataframe, the swuds water use data
 #' @param HUC chr, the HUC of interest to be aggregated
-#' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
-#' 
+#' @param sum_avg chr, user selects either "sum" or "avg" and
+#' the sum or average will be computed
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

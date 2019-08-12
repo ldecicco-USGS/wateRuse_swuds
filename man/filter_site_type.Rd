@@ -18,5 +18,4 @@ Allows user to filter their water use data from SWUDS by site type(s)
 s_wuds <- swuds_sample #example data from Ohio
 site_type <- c("AS", "FA-DV")
 test_site_type <- filter_site_type(s_wuds, site_type)
-
 }

@@ -19,6 +19,4 @@ Allows user to filter their water use data from SWUDS by county
 s_wuds <- swuds_sample #example data from Ohio
 state_county <- c("Ohio_Madison County", "Ohio_Licking County")
 test_county <- filter_county(s_wuds, state_county)
-
-
 }

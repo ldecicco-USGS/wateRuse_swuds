@@ -18,5 +18,4 @@ Allows user to filter their water use data from SWUDS by state(s)
 s_wuds <- swuds_sample #example data from Ohio
 state <- c("Ohio")
 test_state <- filter_state(s_wuds, state)
-
 }

@@ -2,7 +2,7 @@
 #'
 #' Allows user to filter their water use data from SWUDS by season(s)
 #' 
-#' @param s_wuds dataframe, the swuds water use data 
+#' @param s_wuds dataframe, the swuds water use data
 #' @param season chr, the aquifer of interest to be aggregated
 #' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
 #' 
@@ -12,7 +12,6 @@
 #' sum_avg <- "sum"
 #' season <- "Fall"
 #' test_aggSeason <- aggregate_season(s_wuds, season, sum_avg)
-#' 
 aggregate_season <- function(s_wuds, season, sum_avg){
   if (season == "Winter" && sum_avg == "sum"){
     #get Winter sum

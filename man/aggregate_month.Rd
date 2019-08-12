@@ -21,5 +21,4 @@ s_wuds <- swuds_sample #example data from Ohio
 month <- c("Jan", "Feb")
 sum_avg <- "sum"
 test_month <- aggregate_month(s_wuds, month, sum_avg)
-
 }
