@@ -13,19 +13,11 @@
 #' df <- readWaterQuantityXL(file.path(pathToSample, "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 readWaterQuantityXL <- function(file_path){
   
-  dq <- readxl::read_xlsx(path = file_path)
-  
-  # convert column names to NWIS names 
-  # Probably want to put this in sysdata:
-  nwisLU <- readxl::read_xlsx("inst/extdata/nwis_lookup.xlsx")
-  
-  swudcols <- nwisLU$swuds
-  NWIScols <- nwisLU$nwis
-  
-  for (sc in swudcols){
-    colnames(dq)[colnames(dq) == sc] <- NWIScols[which(swudcols == sc)]
-  }
-  
+  dq <- readxl::read_xlsx(path = file_path, 
+                          guess_max = 2000,
+                          na = "NA")
+
+  names(dq)[names(dq) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dq)[names(dq) %in% swudcols], swudcols)]
   
   return(dq)
 }
@@ -42,17 +34,10 @@ readWaterQuantityXL <- function(file_path){
 #' dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
 readPopServedXL <- function(file_path){
   
-  dp <- readxl::read_xlsx(path = file_path)
-  
-  # convert column names to NWIS names 
-  nwisLU <- readxl::read_xlsx(file.path(system.file("extdata",package = "wateRuseSWUDS"),"nwis_lookup.xlsx"))
-  
-  swudcols <- nwisLU$swuds
-  NWIScols <- nwisLU$nwis
-  
-  for (sc in swudcols){
-    colnames(dp)[colnames(dp) == sc] <- NWIScols[which(swudcols == sc)]
-  }
+  dp <- readxl::read_xlsx(path = file_path, 
+                          guess_max = 2000)
+
+  names(dq)[names(dq) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dq)[names(dq) %in% swudcols], swudcols)]
   
   return(dp)
   
