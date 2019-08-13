@@ -4,22 +4,22 @@
 \alias{aggregate_aquifier}
 \title{aggregate_HUC}
 \usage{
-aggregate_aquifier(s.wuds, aquifer, sum_avg)
+aggregate_aquifier(s_wuds, aquifer, sum_avg)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{aquifer}{chr, the aquifer of interest to be aggregated}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
+\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum
+or average will be computed}
 }
 \description{
 Allows user to aggregate their data from SWUDS by user-defined aquifer(s)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 aquifer <- "TBD"
 sum_avg <- "sum"
-test_aquifer <- aggregate_aquifier(s.wuds, aquifer, sum_avg)
-
+test_aquifer <- aggregate_aquifier(s_wuds, aquifer, sum_avg)
 }

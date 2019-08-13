@@ -4,10 +4,10 @@
 \alias{filter_aquifer}
 \title{filter_aquifer}
 \usage{
-filter_aquifer(s.wuds, aquifer)
+filter_aquifer(s_wuds, aquifer)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{aquifer}{chr, the aquifer of interest to be filtered}
 }
@@ -15,8 +15,7 @@ filter_aquifer(s.wuds, aquifer)
 Allows user to filter their water use data from SWUDS by aquifer
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 aquifer <- "TBD"
-test_aquifer <- filter_aquifer(s.wuds, aquifer)
-
+test_aquifer <- filter_aquifer(s_wuds, aquifer)
 }

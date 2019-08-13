@@ -1,23 +1,23 @@
 #' Read Excel file Water Quantity
-#' 
+#'
 #' Function to read in SWUDS Water Quantity Excel file into a dataframe
 #' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 #' @param file_path path to Excel file
-#' 
 #' @export
-#' 
 #' @importFrom readxl read_xlsx
-#' @return data frame 
-#' @examples 
+#' @return data frame
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-#' df <- readWaterQuantityXL(file.path(pathToSample, "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
-readWaterQuantityXL <- function(file_path){
+#' df <- read_swuds_quant(file.path(pathToSample,
+#'          "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
+read_swuds_quant <- function(file_path){
   dq <- readxl::read_xlsx(path = file_path,
                           guess_max = 2000,
                           na = "NA")
-  names(dq)[names(dq) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dq)[names(dq) %in%
-                                                        nwisLU$swuds],
-                                                        nwisLU$swuds)]
+  names(dq)[names(dq) %in% nwisLU$swuds] <-
+    nwisLU$nwis[match(names(dq)[names(dq) %in%
+                                  nwisLU$swuds],
+                      nwisLU$swuds)]
   return(dq)
 }
 
@@ -25,67 +25,63 @@ readWaterQuantityXL <- function(file_path){
 #' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 #'
 #' @param file_path path to file
-#' 
 #' @export
 #' @importFrom readxl read_xlsx
-#' @examples 
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-#' dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
-readPopServedXL <- function(file_path){
+#' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
+read_swuds_pop <- function(file_path){
   dp <- readxl::read_xlsx(path = file_path,
                           guess_max = 2000)
-  names(dp)[names(dp) %in% nwisLU$swuds] <- nwisLU$nwis[match(names(dp)[names(dp) %in%
-                                              nwisLU$swuds], nwisLU$swuds)]
+  names(dp)[names(dp) %in% nwisLU$swuds] <-
+    nwisLU$nwis[match(names(dp)[names(dp) %in%
+                                  nwisLU$swuds],
+                      nwisLU$swuds)]
   return(dp)
 }
 
 #' Merge Water Quantity and Population
-#' 
+#'
 #' Function to merge Water Quantity and Population Served data frames into one
 #' by "to_agency code", "to_site_no", "Year"
-#'
-#' @param waterQuantDF data frame
-#' @param popServDF data frame
+#' @param dq data frame
+#' @param dp data frame
 #' @importFrom dplyr left_join
-#' 
 #' @export
-#' 
-#' @examples 
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-#' dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
-#' dq <- readWaterQuantityXL(file.path(pathToSample,
+#' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
+#' dq <- read_swuds_quant(file.path(pathToSample,
 #'               "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
-#' df <- mergeWaterQuantPopServ(waterQuantDF = dq, popServDF = dp)
-mergeWaterQuantPopServ <- function(waterQuantDF, popServDF){
-  df <- left_join(waterQuantDF, popServDF,
+#' df <- merge_dq_dp(dq = dq, dp = dp)
+merge_dq_dp <- function(dq, dp){
+  df <- left_join(dq, dp,
                   by = c("TO_AGENCY_CD", "TO_SITE_NO", "YEAR"))
   return(df)
 }
 
 
-#' meltWaterQuantPopServ
+#' melt_water_quant_pop
 #' 
 #' Function to create month, year, month#, day, date, decimal date, and water
 #' year to the mergeWaterQuantPopServe data frame
 #'
-#' @param mergeWaterQuantPopServ data frame
+#' @param df_in data frame
 #' @importFrom lubridate decimal_date
 #' @importFrom lubridate days_in_month
 #' @importFrom tidyr gather
-#'
 #' @export
-#'   
-#' @examples 
+#' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-#' dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
-#' dq <- readWaterQuantityXL(file.path(pathToSample,
+#' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
+#' dq <- read_swuds_quant(file.path(pathToSample,
 #'               "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
-#' df <- mergeWaterQuantPopServ(waterQuantDF = dq, popServDF = dp)
-#' df_melt <- meltWaterQuantPopServ(mergeWaterQuantPopServ = df)
-meltWaterQuantPopServ <- function(mergeWaterQuantPopServ){
-  names(mergeWaterQuantPopServ)[names(mergeWaterQuantPopServ) %in%
-                                  paste0(toupper(month.abb), "_VAL")] <- month.abb
-  # df_melt <- dplyr::rename(mergeWaterQuantPopServ,
+#' df <- merge_dq_dp(dq, dp)
+#' df_melt <- melt_water_quant_pop(df)
+melt_water_quant_pop <- function(df_in){
+  names(df_in)[names(df_in) %in%
+                 paste0(toupper(month.abb), "_VAL")] <- month.abb
+  # df_melt <- dplyr::rename(df_in,
   #                          Jan = JAN_VAL,
   #                          Feb = FEB_VAL,
   #                          Mar = MAR_VAL,
@@ -98,7 +94,9 @@ meltWaterQuantPopServ <- function(mergeWaterQuantPopServ){
   #                          Oct = OCT_VAL,
   #                          Nov = NOV_VAL,
   #                          Dec = DEC_VAL)
-  df_melt <- tidyr::gather(mergeWaterQuantPopServ, Month, Volume_mgd, Jan:Dec)
+  Month <- Volume_mgd <- ".dplyr"
+  Jan <- Dec <- ".dplyr"
+  df_melt <- tidyr::gather(df_in, Month, Volume_mgd, Jan:Dec)
   df_melt$Month_num <- match(df_melt$Month, month.abb)
   df_melt$Month_num <- ifelse(df_melt$Month_num < 10,
                               paste0("0", df_melt$Month_num),
@@ -135,11 +133,11 @@ meltWaterQuantPopServ <- function(mergeWaterQuantPopServ){
 # bringing it out in case you want to use it again...but not exporting
 wtr_yr <- function(dates, start_month=9) {
   # Convert dates into POSIXlt
-  dates.posix <- as.POSIXlt(dates)
+  dates_posix <- as.POSIXlt(dates)
   # Year offset
-  offset <- ifelse(dates.posix$mon >= start_month - 1, 1, 0)
+  offset <- ifelse(dates_posix$mon >= start_month - 1, 1, 0)
   # Water year
-  adj.year <- dates.posix$year + 1900 + offset
+  adj_year <- dates_posix$year + 1900 + offset
   # Return the water year
-  return(adj.year)
+  return(adj_year)
 }

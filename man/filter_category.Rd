@@ -4,10 +4,10 @@
 \alias{filter_category}
 \title{filter_category}
 \usage{
-filter_category(s.wuds, category)
+filter_category(s_wuds, category)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{category}{chr, the category of interest to be filtered}
 }
@@ -15,8 +15,7 @@ filter_category(s.wuds, category)
 Allows user to filter their water use data from SWUDS by category
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 category <- c("WS", "IR", "IN")
-test_category <- filter_category(s.wuds, category)
-
+test_category <- filter_category(s_wuds, category)
 }

@@ -4,22 +4,22 @@
 \alias{aggregate_season}
 \title{aggregate_season}
 \usage{
-aggregate_season(s.wuds, season, sum_avg)
+aggregate_season(s_wuds, season, sum_avg)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{season}{chr, the aquifer of interest to be aggregated}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
+\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or
+average will be computed}
 }
 \description{
 Allows user to filter their water use data from SWUDS by season(s)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 sum_avg <- "sum"
 season <- "Fall"
-test_aggSeason <- aggregate_season(s.wuds, season, sum_avg)
-
+test_aggSeason <- aggregate_season(s_wuds, season, sum_avg)
 }

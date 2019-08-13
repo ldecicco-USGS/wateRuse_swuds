@@ -4,10 +4,10 @@
 \alias{filter_HUC}
 \title{filter_HUC}
 \usage{
-filter_HUC(s.wuds, HUC)
+filter_HUC(s_wuds, HUC)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{HUC}{chr, the HUC of interest to be aggregated}
 }
@@ -15,8 +15,7 @@ filter_HUC(s.wuds, HUC)
 Allows user to filter their water use data from SWUDS by HUC
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 HUC <- c("041000040104", "050600020105")
-test_HUC <- filter_HUC(s.wuds, HUC)
-
+test_HUC <- filter_HUC(s_wuds, HUC)
 }

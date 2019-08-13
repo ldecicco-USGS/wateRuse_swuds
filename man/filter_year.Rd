@@ -4,10 +4,10 @@
 \alias{filter_year}
 \title{filter_year}
 \usage{
-filter_year(s.wuds, year)
+filter_year(s_wuds, year)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{year}{numeric, the year of interest to be filtered}
 }
@@ -15,8 +15,7 @@ filter_year(s.wuds, year)
 Allows user to filter their water use data from SWUDS by year(s)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 year <- c("1995", "2009", "2012")
-test_year <- filter_year(s.wuds, year)
-
+test_year <- filter_year(s_wuds, year)
 }

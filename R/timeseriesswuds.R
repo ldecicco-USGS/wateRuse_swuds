@@ -1,83 +1,88 @@
-#' timeseriesswuds.R
+#' timeseriesswuds
 #' 
-#' Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
-#' 
-#' @param areas is a geographical area as defined in your datafile such as county, HUC, or aquifer
-#' @param data.elements character name of data element within available categories by year for state
-#' @param area.column character that defines which column to use to specify area
-#' @param years vector of integers specifying all years available for state. Defaults to NA which shows all years in dataset.
-#' @param s.wuds dataframe, the swuds water use data
-#' @param y.scale allows R to set the y-axis scale given available data range. Defaults to NA which lets R set the scale based on dataset values.
+#' Plot water use monthly (volume_mgd) and annual
+#' (ANNUAL_VAL), (eventually daily)
+#' @param areas is a geographical area as defined in your datafile such as
+#' county, HUC, or aquifer
+#' @param data_elements character name of data element within available
+#' categories by year for state
+#' @param area_column character that defines which column to use to specify area
+#' @param years vector of integers specifying all years available for state.
+#' Defaults to NA which shows all years in dataset.
+#' @param s_wuds dataframe, the swuds water use data
+#' @param y_scale allows R to set the y-axis scale given available
+#' data range. Defaults to NA which lets R set the scale
+#' based on dataset values.
 #' @param log = TRUE or FALSE allows user to set log scale, default is FALSE
-#' @param plot.points is a logical function to show counties as points or clustered bar graph
-#' @param legend is a logical function to include list of counties in a legend if manageable, default is TRUE
-#' @param c.palette color palette to use for points or bars
-#' 
+#' @param plot.points is a logical function to show counties as points or
+#' clustered bar graph
+#' @param legend is a logical function to include list of counties in a
+#' legend if manageable, default is TRUE
+#' @param c_palette color palette to use for points or bars
 #' @export
 #' @import ggplot2
 #' @importFrom tidyr gather_
 #' @importFrom grDevices colorRampPalette
-#' 
-time_series_data <- function(s.wuds, data.elements, area.column,
+time_series_data <- function(s_wuds, data_elements, area_column,
                              plot.points = TRUE,
                              years= NA, areas= NA,
-                             y.scale=NA, log= FALSE, legend= TRUE,
-                             c.palette = c("#999999", "#E69F00", "#56B4E9",
+                             y_scale=NA, log= FALSE, legend= TRUE,
+                             c_palette = c("#999999", "#E69F00", "#56B4E9",
                                            "#009E73", "#F0E442", "#0072B2",
                                            "#D55E00", "#CC79A7")){
-  data.elements <- data.elements[which(!is.na(data.elements))]
+  data_elements <- data_elements[which(!is.na(data_elements))]
   if (all(is.na(areas))){
-    w.use.sub <- s.wuds[, c("YEAR", area.column, data.elements)]
+    w_use_sub <- s_wuds[, c("YEAR", area_column, data_elements)]
   } else {
-    w.use.sub <-  s.wuds[s.wuds[[area.column]] %in% areas,
-                         c("YEAR", area.column, data.elements)]
+    w_use_sub <-  s_wuds[s_wuds[[area_column]] %in% areas,
+                         c("YEAR", area_column, data_elements)]
   }
   if (!any(is.na(years))){
-    w.use.sub <-  w.use.sub[w.use.sub$YEAR %in% years, ]
-    w.use.sub$YEAR <- as.factor(w.use.sub$YEAR)
-    levels(w.use.sub$YEAR) <- as.character(years)
+    w_use_sub <-  w_use_sub[w_use_sub$YEAR %in% years, ]
+    w_use_sub$YEAR <- as.factor(w_use_sub$YEAR)
+    levels(w_use_sub$YEAR) <- as.character(years)
   }
-  df <- w.use.sub[, c("YEAR", area.column, data.elements)]
-  df <- gather_(df, "dataElement", "value", c(data.elements))
-  fix.labs <- gsub("\\,", "\\,\n", data.elements$NAME)
-  names(fix.labs) <- data.elements$DATAELEMENT
-  df$dataElement <- fix.labs[gsub(pattern = "\\.",
+  df <- w_use_sub[, c("YEAR", area_column, data_elements)]
+  df <- gather_(df, "data_element", "value", c(data_elements))
+  fix_labs <- gsub("\\,", "\\,\n", data_elements$NAME)
+  names(fix_labs) <- data_elements$data_element
+  df$data_element <- fix_labs[gsub(pattern = "\\.",
                                   replacement = "-",
-                                  x = df$dataElement)]
-  if (length(unique(df[[area.column]])) > length(c.palette)){
-    c.palette.ramp <- colorRampPalette(c.palette)
-    c.palette <- c.palette.ramp(length(unique(df[[area.column]])))
+                                  x = df$data_element)]
+  if (length(unique(df[[area_column]])) > length(c_palette)){
+    c_palette_ramp <- colorRampPalette(c_palette)
+    c_palette <- c_palette_ramp(length(unique(df[[area_column]])))
   }
-  ts.object <- ggplot(data = df)
+  ts_object <- ggplot(data = df)
   if (plot.points){
-    ts.object <- ts.object +
+    ts_object <- ts_object +
       geom_point(aes_string(x = "YEAR", y = "value",
-                            color = area.column)) +
-      scale_colour_manual(values = c.palette)
+                            color = area_column)) +
+      scale_colour_manual(values = c_palette)
   } else {
-    ts.object <- ts.object +
+    ts_object <- ts_object +
       geom_bar(aes_string(x = "YEAR", y = "value",
-                          fill = area.column),
+                          fill = area_column),
                position = "dodge", stat = "identity") +
-      scale_fill_manual(values = c.palette)
+      scale_fill_manual(values = c_palette)
   }
-  ts.object <- ts.object +
-    facet_grid(dataElement ~ ., scales = "free") +
+  ts_object <- ts_object +
+    facet_grid(data_element ~ ., scales = "free") +
     ylab("") +
     theme(axis.text.x = element_text(angle = 90,
                                      vjust = 0.5,
                                      hjust = 1))
-  if (!all(is.na(y.scale))){
-    ts.object <- ts.object +
-      scale_y_continuous(limits = y.scale)
+  if (!all(is.na(y_scale))){
+    ts_object <- ts_object +
+      scale_y_continuous(limits = y_scale)
   }
   if (log){
-    ts.object <- ts.object +
+    ts_object <- ts_object +
       scale_y_log10()
   }
   if (!legend){
-    ts.object <- ts.object +
+    ts_object <- ts_object +
       theme(legend.position = "none")
   }
-  return(ts.object)
+  return(ts_object)
 }

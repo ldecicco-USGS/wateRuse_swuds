@@ -4,22 +4,22 @@
 \alias{aggregate_year}
 \title{aggregate_year}
 \usage{
-aggregate_year(s.wuds, year, sum_avg)
+aggregate_year(s_wuds, year, sum_avg)
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
 \item{year}{numeric, the year of interest to be aggregated}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
+\item{sum_avg}{chr, user selects either "sum" or "avg"
+and the sum or average will be computed}
 }
 \description{
 Allows user to aggregate their data from SWUDS by user-defined year(s)
 }
 \examples{
-s.wuds <- swudsSample #example data from Ohio
+s_wuds <- swuds_sample #example data from Ohio
 year <- c("1995", "2004")
 sum_avg <- "sum"
-test_year <- aggregate_year(s.wuds, year, sum_avg)
-
+test_year <- aggregate_year(s_wuds, year, sum_avg)
 }

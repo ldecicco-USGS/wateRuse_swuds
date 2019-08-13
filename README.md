@@ -8,16 +8,16 @@
 pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
 
 # Read in the water quantity table
-dq <- readWaterQuantityXL(file.path(pathToSample,"OH_CTF_SW_monthly_permit_sample_data.xlsx"))
+dq <- read_swuds_quant(file.path(pathToSample,"OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 
 # Read in the population served table
-dp <- readPopServedXL(file.path(pathToSample,"OHpopserved_output.xlsx"))
+dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 
 # merge the tables
-df <- mergeWaterQuantPopServ(waterQuantDF = dq, popServDF = dp)
+df <- merge_dq_dp(dq, dp)
 
 #melt the table
-df_melt <- meltWaterQuantPopServ(mergeWaterQuantPopServ = df)
+df_melt <- melt_water_quant_pop(df)
 ```
 
 ## Pull requests

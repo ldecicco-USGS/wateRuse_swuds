@@ -4,44 +4,47 @@
 \alias{map_sites}
 \title{map_sites}
 \usage{
-map_sites(s.wuds, data.element, year, state, norm.element = NA,
-  unit.type = "county", site.from.to = "from")
+map_sites(s_wuds, data_element, year, state, norm_element = NA,
+  unit_type = "county", site_from_to = "from")
 }
 \arguments{
-\item{s.wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{dataframe, the swuds water use data}
 
-\item{data.element}{chr, data element to be plotted}
+\item{data_element}{chr, data element to be plotted}
 
-\item{year}{int, the year of interest to be mapped (defines historical basis for counties)}
+\item{year}{int, the year of interest to be mapped (defines
+historical basis for counties)}
 
 \item{state}{character name of state}
 
-\item{norm.element}{chr, element used to normalize data.element}
+\item{norm_element}{chr, element used to normalize data_element}
 
-\item{unit.type}{chr, type of unit to be mapped; acceptable options are "county", "huc", or "aquifer"}
+\item{unit_type}{chr, type of unit to be mapped;
+acceptable options are "county", "huc", or "aquifer"}
 
-\item{site.from.to}{chr, either 'from' or 'to' to designate the site lats-lons to use; the 'from' site or the 'to' site}
+\item{site_from_to}{chr, either 'from' or 'to' to designate the site
+lats-lons to use; the 'from' site or the 'to' site}
 }
 \description{
-Returns map of data element mapped by sites that have lat-lons 
+Returns map of data element mapped by sites that have lat-lons
 Only works with one data element as currently written
-Assumes the s.wuds dataframe being used as input has already been subsetted 
+Assumes the s_wuds dataframe being used as input has already been subsetted
 using filter functions (by site type, state, or county, years, etc.)
 that is, no subsetting is done inside this function
 Dataframe must not have more than one row per site ID
 Point sizes are scaled to value
 }
 \examples{
-s.wuds <- swudsSample #example data from OHIO
+s_wuds <- swuds_sample #example data from OHIO
 # subset for this example
-s.wuds <- s.wuds[which(s.wuds$FROM_SITE_TP_CD == "AS" & 
-                       s.wuds$YEAR == 2010 &s.wuds$Month_num == 8),]
-data.element <- "Volume_mgd"
+s_wuds <- s_wuds[which(s_wuds$FROM_SITE_TP_CD == "AS" &
+                       s_wuds$YEAR == 2010 &s_wuds$Month_num == 8),]
+data_element <- "Volume_mgd"
 state <- "Ohio"
 year <- 2010
-unit.type <- "county"
-norm.element <- NA
-sites.map <- map_sites(s.wuds, data.element, year, state)
-data.element <- "JUL_VAL"
-norm.element <- "ANNUAL_VAL"
+unit_type <- "county"
+norm_element <- NA
+sites.map <- map_sites(s_wuds, data_element, year, state)
+data_element <- "JUL_VAL"
+norm_element <- "ANNUAL_VAL"
 }
