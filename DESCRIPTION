@@ -36,6 +36,7 @@ Imports:
 Suggests:
     knitr,
     testthat,
+    lintr,
     covr
 BuildVignettes: true
 VignetteBuilder: knitr

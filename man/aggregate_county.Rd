@@ -13,7 +13,8 @@ aggregate_county(s_wuds, state_county, sum_avg)
 State abbreviation is also
 appended to the beginning of the county}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
+\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or
+average will be computed}
 }
 \description{
 Allows user to aggregate their data from SWUDS by user-defined county(ies)

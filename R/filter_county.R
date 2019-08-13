@@ -3,9 +3,8 @@
 #' Allows user to filter their water use data from SWUDS by county
 #'
 #' @param s_wuds dataframe, the swuds water use data
-#' @param state_county chr, the county of interested to be filtered. The state abb is appended to
-#' the front of the county name
-#' 
+#' @param state_county chr, the county of interested to be filtered.
+#' The state abb is appended to the front of the county name
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

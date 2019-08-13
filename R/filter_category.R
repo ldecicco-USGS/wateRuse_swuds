@@ -4,7 +4,6 @@
 #'
 #' @param s_wuds dataframe, the swuds water use data
 #' @param category chr, the category of interest to be filtered
-#' 
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

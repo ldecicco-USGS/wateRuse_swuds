@@ -9,7 +9,8 @@ filter_month(s_wuds, month)
 \arguments{
 \item{s_wuds}{dataframe, the swuds water use data}
 
-\item{month}{chr, the month of interest to be filtered in abb format (e.g. Jan, Feb, etc.)}
+\item{month}{chr, the month of interest to be filtered in
+abb format (e.g. Jan, Feb, etc.)}
 }
 \description{
 Allows user to filter their water use data from SWUDS by month(s)

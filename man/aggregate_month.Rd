@@ -9,9 +9,11 @@ aggregate_month(s_wuds, month, sum_avg)
 \arguments{
 \item{s_wuds}{dataframe, the swuds water use data}
 
-\item{month}{chr, the month of interest to be aggregated in abb format (i.e. Jan, Feb, etc.)}
+\item{month}{chr, the month of interest to be aggregated in abb
+format (i.e. Jan, Feb, etc.)}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
+\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or
+average will be computed}
 }
 \description{
 Allows user to aggregate their data from SWUDS by user-defined month(s)

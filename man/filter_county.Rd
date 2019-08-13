@@ -9,8 +9,8 @@ filter_county(s_wuds, state_county)
 \arguments{
 \item{s_wuds}{dataframe, the swuds water use data}
 
-\item{state_county}{chr, the county of interested to be filtered. The state abb is appended to
-the front of the county name}
+\item{state_county}{chr, the county of interested to be filtered.
+The state abb is appended to the front of the county name}
 }
 \description{
 Allows user to filter their water use data from SWUDS by county

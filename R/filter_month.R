@@ -3,8 +3,8 @@
 #' Allows user to filter their water use data from SWUDS by month(s)
 #'
 #' @param s_wuds dataframe, the swuds water use data
-#' @param month chr, the month of interest to be filtered in abb format (e.g. Jan, Feb, etc.)
-#' 
+#' @param month chr, the month of interest to be filtered in
+#' abb format (e.g. Jan, Feb, etc.)
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

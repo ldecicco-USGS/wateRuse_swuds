@@ -4,9 +4,7 @@
 #'
 #' @param s_wuds dataframe, the swuds water use data
 #' @param HUC chr, the HUC of interest to be aggregated
-#' 
 #' @export
-#'
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio
 #' HUC <- c("041000040104", "050600020105")

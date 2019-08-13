@@ -4,7 +4,7 @@
 \alias{map_sites}
 \title{map_sites}
 \usage{
-map_sites(s_wuds, data_element, year, state, norm.element = NA,
+map_sites(s_wuds, data_element, year, state, norm_element = NA,
   unit_type = "county", site_from_to = "from")
 }
 \arguments{
@@ -12,11 +12,12 @@ map_sites(s_wuds, data_element, year, state, norm.element = NA,
 
 \item{data_element}{chr, data element to be plotted}
 
-\item{year}{int, the year of interest to be mapped (defines historical basis for counties)}
+\item{year}{int, the year of interest to be mapped (defines
+historical basis for counties)}
 
 \item{state}{character name of state}
 
-\item{norm.element}{chr, element used to normalize data_element}
+\item{norm_element}{chr, element used to normalize data_element}
 
 \item{unit_type}{chr, type of unit to be mapped;
 acceptable options are "county", "huc", or "aquifer"}
@@ -25,9 +26,9 @@ acceptable options are "county", "huc", or "aquifer"}
 lats-lons to use; the 'from' site or the 'to' site}
 }
 \description{
-Returns map of data element mapped by sites that have lat-lons 
+Returns map of data element mapped by sites that have lat-lons
 Only works with one data element as currently written
-Assumes the s_wuds dataframe being used as input has already been subsetted 
+Assumes the s_wuds dataframe being used as input has already been subsetted
 using filter functions (by site type, state, or county, years, etc.)
 that is, no subsetting is done inside this function
 Dataframe must not have more than one row per site ID
@@ -36,14 +37,14 @@ Point sizes are scaled to value
 \examples{
 s_wuds <- swuds_sample #example data from OHIO
 # subset for this example
-s_wuds <- s_wuds[which(s_wuds$FROM_SITE_TP_CD == "AS" & 
+s_wuds <- s_wuds[which(s_wuds$FROM_SITE_TP_CD == "AS" &
                        s_wuds$YEAR == 2010 &s_wuds$Month_num == 8),]
 data_element <- "Volume_mgd"
 state <- "Ohio"
 year <- 2010
 unit_type <- "county"
-norm.element <- NA
+norm_element <- NA
 sites.map <- map_sites(s_wuds, data_element, year, state)
 data_element <- "JUL_VAL"
-norm.element <- "ANNUAL_VAL"
+norm_element <- "ANNUAL_VAL"
 }

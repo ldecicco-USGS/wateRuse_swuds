@@ -18,5 +18,6 @@ and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 }
 \examples{
 pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-df <- read_swuds_quant(file.path(pathToSample, "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
+df <- read_swuds_quant(file.path(pathToSample,
+         "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 }

@@ -1,11 +1,11 @@
 #' aggregate_month
 #'
 #' Allows user to aggregate their data from SWUDS by user-defined month(s)
-#' 
 #' @param s_wuds dataframe, the swuds water use data
-#' @param month chr, the month of interest to be aggregated in abb format (i.e. Jan, Feb, etc.)
-#' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
-#' 
+#' @param month chr, the month of interest to be aggregated in abb
+#' format (i.e. Jan, Feb, etc.)
+#' @param sum_avg chr, user selects either "sum" or "avg" and the sum or
+#' average will be computed
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

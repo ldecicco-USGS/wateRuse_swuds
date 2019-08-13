@@ -19,7 +19,7 @@ refer to for subsetting}
 hc_sub dataframe, a subset of HUC polygon data
 }
 \description{
-Returns HUC polygons 
+Returns HUC polygons
 Dataset is subset on basis of area of interest
 }
 \examples{

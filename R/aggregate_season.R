@@ -1,11 +1,10 @@
 #' aggregate_season
 #'
 #' Allows user to filter their water use data from SWUDS by season(s)
-#' 
 #' @param s_wuds dataframe, the swuds water use data
 #' @param season chr, the aquifer of interest to be aggregated
-#' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
-#' 
+#' @param sum_avg chr, user selects either "sum" or "avg" and the sum or
+#' average will be computed
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

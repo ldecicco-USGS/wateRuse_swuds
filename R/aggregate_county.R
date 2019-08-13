@@ -6,8 +6,8 @@
 #' @param state_county chr, the county of interest to be aggregated.
 #' State abbreviation is also
 #' appended to the beginning of the county
-#' @param sum_avg chr, user selects either "sum" or "avg" and the sum or average will be computed
-#' 
+#' @param sum_avg chr, user selects either "sum" or "avg" and the sum or
+#' average will be computed
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

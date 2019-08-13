@@ -1,8 +1,7 @@
 #' subset_huc_polygons
 #'
-#' Returns HUC polygons 
+#' Returns HUC polygons
 #' Dataset is subset on basis of area of interest
-#' 
 #' @param areas chr, vector of codes indicating area of interest to subset on
 #' @param area_column chr, defines which column the areas
 #' refer to for subsetting

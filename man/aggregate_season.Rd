@@ -11,7 +11,8 @@ aggregate_season(s_wuds, season, sum_avg)
 
 \item{season}{chr, the aquifer of interest to be aggregated}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or average will be computed}
+\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum or
+average will be computed}
 }
 \description{
 Allows user to filter their water use data from SWUDS by season(s)

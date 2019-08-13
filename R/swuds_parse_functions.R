@@ -1,14 +1,15 @@
 #' Read Excel file Water Quantity
-#' 
+#'
 #' Function to read in SWUDS Water Quantity Excel file into a dataframe
 #' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
 #' @param file_path path to Excel file
 #' @export
 #' @importFrom readxl read_xlsx
-#' @return data frame 
+#' @return data frame
 #' @examples
 #' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-#' df <- read_swuds_quant(file.path(pathToSample, "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
+#' df <- read_swuds_quant(file.path(pathToSample,
+#'          "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 read_swuds_quant <- function(file_path){
   dq <- readxl::read_xlsx(path = file_path,
                           guess_max = 2000,
@@ -40,10 +41,9 @@ read_swuds_pop <- function(file_path){
 }
 
 #' Merge Water Quantity and Population
-#' 
+#'
 #' Function to merge Water Quantity and Population Served data frames into one
 #' by "to_agency code", "to_site_no", "Year"
-#'
 #' @param dq data frame
 #' @param dp data frame
 #' @importFrom dplyr left_join

@@ -2,9 +2,9 @@
 % Please edit documentation in R/timeseriesswuds.R
 \name{time_series_data}
 \alias{time_series_data}
-\title{timeseriesswuds.R}
+\title{timeseriesswuds}
 \usage{
-time_series_data(s_wuds, dataelements, area.column, plot.points = TRUE,
+time_series_data(s_wuds, data_elements, area_column, plot.points = TRUE,
   years = NA, areas = NA, y_scale = NA, log = FALSE,
   legend = TRUE, c_palette = c("#999999", "#E69F00", "#56B4E9",
   "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"))
@@ -12,24 +12,32 @@ time_series_data(s_wuds, dataelements, area.column, plot.points = TRUE,
 \arguments{
 \item{s_wuds}{dataframe, the swuds water use data}
 
-\item{area.column}{character that defines which column to use to specify area}
+\item{data_elements}{character name of data element within available
+categories by year for state}
 
-\item{plot.points}{is a logical function to show counties as points or clustered bar graph}
+\item{area_column}{character that defines which column to use to specify area}
 
-\item{years}{vector of integers specifying all years available for state. Defaults to NA which shows all years in dataset.}
+\item{plot.points}{is a logical function to show counties as points or
+clustered bar graph}
 
-\item{areas}{is a geographical area as defined in your datafile such as county, HUC, or aquifer}
+\item{years}{vector of integers specifying all years available for state.
+Defaults to NA which shows all years in dataset.}
 
-\item{y_scale}{allows R to set the y-axis scale given available data range. Defaults to NA which lets R set the scale based on dataset values.}
+\item{areas}{is a geographical area as defined in your datafile such as
+county, HUC, or aquifer}
+
+\item{y_scale}{allows R to set the y-axis scale given available
+data range. Defaults to NA which lets R set the scale
+based on dataset values.}
 
 \item{log}{= TRUE or FALSE allows user to set log scale, default is FALSE}
 
-\item{legend}{is a logical function to include list of counties in a legend if manageable, default is TRUE}
+\item{legend}{is a logical function to include list of counties in a
+legend if manageable, default is TRUE}
 
 \item{c_palette}{color palette to use for points or bars}
-
-\item{data_elements}{character name of data element within available categories by year for state}
 }
 \description{
-Plot water use monthly (volume_mgd) and annual (ANNUAL_VAL), (eventually daily)
+Plot water use monthly (volume_mgd) and annual
+(ANNUAL_VAL), (eventually daily)
 }

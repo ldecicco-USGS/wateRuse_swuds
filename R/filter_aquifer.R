@@ -1,10 +1,9 @@
 #' filter_aquifer
 #'
 #' Allows user to filter their water use data from SWUDS by aquifer
-#' 
 #' @param s_wuds dataframe, the swuds water use data
 #' @param aquifer chr, the aquifer of interest to be filtered
-#' 
+#'
 #' @export
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio

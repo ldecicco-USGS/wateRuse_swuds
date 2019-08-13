@@ -20,7 +20,7 @@ aggregate_aquifier <- function(s_wuds, aquifer, sum_avg){
   }
   s_wuds <- s_wuds[s_wuds$aquifer %in% aquifer, ]
   s_wuds$Volume_mgd <- as.numeric(s_wuds$Volume_mgd)
-  if (sum_avg == "sum"){
+  if(sum_avg == "sum"){
     s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
                         by = list(aquifer = s_wuds$aquifer),
                         FUN = sum, na.rm = TRUE)
