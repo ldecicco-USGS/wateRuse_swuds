@@ -24,5 +24,5 @@ test_that("Data", {
   
   #melt the table
   df_melt <- melt_water_quant_pop(df)
-  expect_equal(nrow(df_melt), 96876)  
+  expect_equal(nrow(df_melt), 11988)  
 })

@@ -33,12 +33,14 @@ Imports:
     tidyr,
     lubridate,
     readxl,
-    shiny
+    shiny,
+    wateRuse
 Suggests:
     knitr,
     testthat,
     rmarkdown,
     lintr,
+    pkgdown,
     covr
 BuildVignettes: true
 VignetteBuilder: knitr

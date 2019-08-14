@@ -8,6 +8,7 @@
 #' @param year int, the year of interest to be mapped
 #' (defines historical basis for HUCs)
 #' @export
+#' @importFrom wateRuse huc08Poly
 #' @return hc_sub dataframe, a subset of HUC polygon data
 #' @examples
 #' areas <- "ME" # 21 HUC8s in Maine

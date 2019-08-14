@@ -11,7 +11,9 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
 ```
 
 ## Site-Specific Water-Use Data System
@@ -20,7 +22,9 @@ Document, document, document!
 
 ### Sample workflow
 
-```{r sample, echo = TRUE, message=FALSE, warning=FALSE}
+Load the data:
+
+```{r sample, echo = TRUE, eval=FALSE}
 library(wateRuseSWUDS)
 
 path_swuds <- system.file("extdata",package = "wateRuseSWUDS")
@@ -38,7 +42,17 @@ df <- merge_dq_dp(dq, dp)
 
 #melt the table
 df_melt <- melt_water_quant_pop(df)
+```
 
+```{r real_setup, echo=FALSE, eval=TRUE}
+library(wateRuseSWUDS)
+df_melt <- swuds_sample
+```
+
+
+## Map the data
+
+```{r mapit}
 map_it <- map_sites(df_melt, 
                     data_element = "Volume_mgd",
                     year = 2010,
@@ -47,4 +61,3 @@ map_it <- map_sites(df_melt,
 map_it
 
 ```
-
