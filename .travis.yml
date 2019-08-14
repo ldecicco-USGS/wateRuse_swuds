@@ -6,6 +6,7 @@
 
 language: r
 r: release
+cache: packages
 
 addons:
   apt:

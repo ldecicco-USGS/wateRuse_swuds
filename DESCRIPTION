@@ -3,7 +3,7 @@ Type: Package
 Title: Site-Specific Water-Use Data System
 Version: 0.0.1
 Authors@R: c( person("Robert", "Dudley", role = c("aut", "cre"),
-    email = "ldecicco@usgs.gov"),
+    email = "rwdudley@usgs.gov"),
     person("Samantha","Sullivan", role = "aut"),
     person("Gary","Martin", role = "aut"),
     person("Jennifer","Shourds", role = "aut"),

@@ -52,7 +52,7 @@ df_melt <- swuds_sample
 
 ## Map the data
 
-```{r mapit}
+```{r mapit, eval=FALSE}
 map_it <- map_sites(df_melt, 
                     data_element = "Volume_mgd",
                     year = 2010,
