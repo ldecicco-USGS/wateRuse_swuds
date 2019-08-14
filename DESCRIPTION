@@ -34,7 +34,8 @@ Imports:
     lubridate,
     readxl,
     shiny,
-    wateRuse
+    wateRuse,
+    shinycssloaders
 Suggests:
     knitr,
     testthat,

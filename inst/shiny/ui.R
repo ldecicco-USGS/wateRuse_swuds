@@ -23,9 +23,9 @@ sidebar <- dashboardSidebar(
 )
 
 body <- dashboardBody(
-  tabBox(width = 12, id="mainOut",
+  tabBox(width = 12, id = "mainOut",
          tabPanel(title = tagList("Map", shiny::icon("map-marker")),
-                  value="map",
+                  value = "map",
                   shinycssloaders::withSpinner(leaflet::leafletOutput("mymap",height = "500px"))
          )),
   fluidRow(

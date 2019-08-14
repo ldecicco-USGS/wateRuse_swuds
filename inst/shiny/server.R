@@ -1,4 +1,4 @@
-options(shiny.maxRequestSize=10*1024^2)
+options(shiny.maxRequestSize = 10 * 1024^2)
 
 
 shiny::shinyServer(function(input, output, session) {
@@ -12,7 +12,7 @@ shiny::shinyServer(function(input, output, session) {
     isolate({
       map <- leaflet::leaflet() %>%
         leaflet::addProviderTiles("CartoDB.Positron") %>%
-        leaflet::setView(lng = -83.5, lat = 44.5, zoom=6)    
+        leaflet::setView(lng = -83.5, lat = 44.5, zoom = 6)    
     })
     
   })
