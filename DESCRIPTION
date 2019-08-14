@@ -32,10 +32,12 @@ Imports:
     scales,
     tidyr,
     lubridate,
-    readxl
+    readxl,
+    shiny
 Suggests:
     knitr,
     testthat,
+    rmarkdown,
     lintr,
     covr
 BuildVignettes: true
