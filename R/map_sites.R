@@ -24,6 +24,8 @@
 #' @import mapproj
 #' @import rgeos
 #' @import scales
+#' @importFrom wateRuse histCounties
+#' @importFrom wateRuse stateCd
 #' @importFrom ggthemes theme_map
 #' @importFrom dplyr left_join
 #' @importFrom scales pretty_breaks
@@ -39,8 +41,6 @@
 #' norm_element <- NA
 #' sites.map <- map_sites(s_wuds, data_element, year, state)
 #' sites.map
-#' data_element <- "JUL_VAL"
-#' norm_element <- "ANNUAL_VAL"
 map_sites <- function(s_wuds, data_element, year, state,
                       norm_element=NA, unit_type="county",
                       site_from_to = "from"){
@@ -120,7 +120,7 @@ map_sites <- function(s_wuds, data_element, year, state,
   ch_plot <- ggplot() +
     geom_polygon(data = hc_subf,
                  aes_string(x = "long", y = "lat",
-                            group = "group", fill = p_elem, label = "labels"),
+                            group = "group", fill = p_elem),
                             color = "black", size = 0.25) +
     coord_quickmap() +
     theme_map() +
