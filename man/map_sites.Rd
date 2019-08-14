@@ -45,6 +45,7 @@ year <- 2010
 unit_type <- "county"
 norm_element <- NA
 sites.map <- map_sites(s_wuds, data_element, year, state)
+sites.map
 data_element <- "JUL_VAL"
 norm_element <- "ANNUAL_VAL"
 }
