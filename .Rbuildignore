@@ -7,3 +7,4 @@ man/figures
 docs
 ^\.lintr$
 ^codecov\.yml$
+_pkgdown.yml

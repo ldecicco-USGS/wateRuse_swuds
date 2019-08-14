@@ -6,14 +6,16 @@ test_that("Data", {
   expect_equal(ncol(swuds_sample), 152)
   
   # Test loading:
-  path_to_sample <- system.file("extdata",package = "wateRuseSWUDS")
+  path_to_sample <- system.file("extdata", package = "wateRuseSWUDS")
   
   # Read in the water quantity table
-  dq <- read_swuds_quant(file.path(path_to_sample,"OH_CTF_SW_monthly_permit_sample_data.xlsx"))
+  dq <- read_swuds_quant(file.path(path_to_sample,
+                                   "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
   expect_equal(ncol(dq), 109)
   
   # Read in the population served table
-  dp <- read_swuds_pop(file.path(path_to_sample,"OHpopserved_output.xlsx"))
+  dp <- read_swuds_pop(file.path(path_to_sample,
+                                 "OHpopserved_output.xlsx"))
   expect_equal(ncol(dp), 51)
   
   # merge the tables
