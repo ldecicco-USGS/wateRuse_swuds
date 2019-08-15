@@ -5,9 +5,11 @@ output:
     toc: true
     number_sections: false
 vignette: >
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{Introduction to wateRuseSWUDS}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -52,7 +54,13 @@ df_melt <- swuds_sample
 
 ## Map the data
 
-```{r mapit, eval=FALSE}
+Let's look at "AS" sites in August:
+
+```{r mapit, eval = FALSE}
+
+s_wuds <- df_melt[which(df_melt$FROM_SITE_TP_CD == "AS" &
+                          df_melt$Month_num == 8), ]
+
 map_it <- map_sites(df_melt, 
                     data_element = "Volume_mgd",
                     year = 2010,

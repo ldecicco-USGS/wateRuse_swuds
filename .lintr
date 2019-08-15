@@ -1,3 +1,7 @@
+exclusions: list.files(path = "inst/shiny",
+recursive = TRUE,
+full.names = TRUE)
+  
 linters: with_defaults(
   camel_case_linter = NULL,
   object_name_linter = NULL,

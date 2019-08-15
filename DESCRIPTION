@@ -32,9 +32,12 @@ Imports:
     scales,
     tidyr,
     lubridate,
+    DT,
     readxl,
     shiny,
-    wateRuse
+    wateRuse,
+    shinycssloaders,
+    shinydashboard
 Suggests:
     knitr,
     testthat,
