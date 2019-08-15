@@ -17,4 +17,19 @@ shiny::shinyServer(function(input, output, session) {
     
   })
   
+  output$show_table <- DT::renderDataTable({    
+    validate(
+      need(!is.null(raw_data$data), "Please select a data set")
+    )
+    
+    melt_df <- melted_data()
+    
+    DT::datatable(melt_df,
+                  extensions = 'Buttons',
+                  options = list(pageLength = 10),
+                  rownames = FALSE)
+  })
+  
+  source("get_data.R",local=TRUE)$value
+  
 })
