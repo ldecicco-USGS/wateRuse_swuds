@@ -2,7 +2,7 @@
 % Please edit documentation in R/explore_swuds.R
 \name{explore_swuds}
 \alias{explore_swuds}
-\title{Explore data in the Shiny Application}
+\title{Explore data in the shiny application}
 \usage{
 explore_swuds(browse = TRUE)
 }
@@ -10,12 +10,7 @@ explore_swuds(browse = TRUE)
 \item{browse}{Logical. Use browser for running Shiny app.}
 }
 \description{
-Open an interactive app in a browser. See the "Shiny App" vignette:
-\href{../doc/shinyApp.html}{\code{vignette("shinyApp", package = "toxEval")}} for more details. Using this 
-function is a quick and convenient way
-to explore data. For more customization, the R-code to 
-produce each graph and table is displayed in the app. That is 
-a good starting-point for a custom analysis.
+Open an interactive app in a browser.
 }
 \examples{
 \dontrun{

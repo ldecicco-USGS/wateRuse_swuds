@@ -1,11 +1,6 @@
-#' Explore data in the Shiny Application
+#' Explore data in the shiny application
 #' 
-#' Open an interactive app in a browser. See the "Shiny App" vignette:
-#' \href{../doc/shinyApp.html}{\code{vignette("shinyApp", package = "toxEval")}} for more details. Using this 
-#' function is a quick and convenient way
-#' to explore data. For more customization, the R-code to 
-#' produce each graph and table is displayed in the app. That is 
-#' a good starting-point for a custom analysis.
+#' Open an interactive app in a browser. 
 #' 
 #' @param browse Logical. Use browser for running Shiny app.
 #' @export
@@ -18,5 +13,6 @@
 #' explore_swuds()
 #' }
 explore_swuds <- function(browse=TRUE){
-  shiny::runApp(system.file('shiny', package='wateRuseSWUDS'), launch.browser = browse)
+  shiny::runApp(system.file("shiny", package = "wateRuseSWUDS"),
+                launch.browser = browse)
 }
