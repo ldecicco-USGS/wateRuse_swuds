@@ -1,6 +1,7 @@
 exclusions: list(
   "inst/shiny/server.R",
-  "inst/shiny/ui.R")
+  "inst/shiny/ui.R",
+  "inst/shiny/get_data.R")
   
 linters: with_defaults(
   camel_case_linter = NULL,
