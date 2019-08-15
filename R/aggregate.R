@@ -1,6 +1,6 @@
-#' aggregate_HUC
+#' aggregate functions
 #'
-#' Allows user to aggregate their data from SWUDS by user-defined aquifer(s)
+#' Allows user to aggregate their data from SWUDS by user-defined parameters.
 #'
 #' @param s_wuds dataframe, the swuds water use data
 #' @param aquifer chr, the aquifer of interest to be aggregated
