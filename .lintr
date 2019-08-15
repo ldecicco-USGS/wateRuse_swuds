@@ -1,6 +1,4 @@
-exclusions: list.files(path = "inst/shiny",
-recursive = TRUE,
-full.names = TRUE)
+list("inst/shiny/ui.R", "inst/shiny/server.R")
   
 linters: with_defaults(
   camel_case_linter = NULL,

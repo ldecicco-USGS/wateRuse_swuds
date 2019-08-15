@@ -1,3 +1,5 @@
+# nolint
+
 raw_data <- reactiveValues(data = NULL)
 
 observeEvent(input$example_data, {
