@@ -3,8 +3,9 @@
 #' Allows user to aggregate their data from SWUDS by user-defined parameters.
 #'
 #' @param s_wuds swuds object (data frame from melt function)
-#' @param sum_avg chr, user selects either "sum" or "avg" and the sum
-#' or average will be computed
+#' @param filter_by chr, column to filter and aggregate by
+#' @param filter_val values to filter to
+#' @param aggregate_by column to aggregate. Defaults to "Volume_mgd"
 #' @export
 #' @rdname aggregate
 #' @importFrom stats aggregate
@@ -44,6 +45,7 @@ aggregate_swuds <- function(s_wuds,
 
 #' @export
 #' @rdname aggregate
+#' @param sum_avg char sum or avg
 #' @param season chr, the aquifer of interest to be aggregated
 #' @examples
 #' season <- "Fall"

@@ -13,10 +13,15 @@ aggregate_season(s_wuds, season, sum_avg)
 \arguments{
 \item{s_wuds}{swuds object (data frame from melt function)}
 
+\item{filter_by}{chr, column to filter and aggregate by}
+
+\item{filter_val}{values to filter to}
+
+\item{aggregate_by}{column to aggregate. Defaults to "Volume_mgd"}
+
 \item{season}{chr, the aquifer of interest to be aggregated}
 
-\item{sum_avg}{chr, user selects either "sum" or "avg" and the sum
-or average will be computed}
+\item{sum_avg}{char sum or avg}
 }
 \description{
 Allows user to aggregate their data from SWUDS by user-defined parameters.
@@ -24,7 +29,8 @@ Allows user to aggregate their data from SWUDS by user-defined parameters.
 \examples{
 s_wuds <- swuds_sample #example data from Ohio
 test_all_huc <- aggregate_swuds(s_wuds, "FROM_HUC_CD")
-test_some_huc <- aggregate_swuds(s_wuds, "FROM_HUC_CD", c("041000040104", "050600020105"))
+test_some_huc <- aggregate_swuds(s_wuds, "FROM_HUC_CD",
+c("041000040104", "050600020105"))
 test_some_years <- aggregate_swuds(s_wuds, "YEAR", c("1995", "2004"))
 #test_some_aquifers <- aggregate_swuds(s_wuds, "aquifer", "TBD")
 test_some_months <- aggregate_swuds(s_wuds, "Month", c("Jan", "Feb"))
