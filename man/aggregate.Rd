@@ -7,7 +7,7 @@
 \alias{aggregate_month}
 \alias{aggregate_season}
 \alias{aggregate_year}
-\title{aggregate_HUC}
+\title{aggregate functions}
 \usage{
 aggregate_aquifier(s_wuds, aquifer, sum_avg)
 
@@ -22,7 +22,7 @@ aggregate_season(s_wuds, season, sum_avg)
 aggregate_year(s_wuds, year, sum_avg)
 }
 \arguments{
-\item{s_wuds}{dataframe, the swuds water use data}
+\item{s_wuds}{swuds object (data frame from melt function)}
 
 \item{aquifer}{chr, the aquifer of interest to be aggregated}
 
@@ -43,7 +43,7 @@ format (i.e. Jan, Feb, etc.)}
 \item{year}{numeric, the year of interest to be aggregated}
 }
 \description{
-Allows user to aggregate their data from SWUDS by user-defined aquifer(s)
+Allows user to aggregate their data from SWUDS by user-defined parameters.
 }
 \examples{
 s_wuds <- swuds_sample #example data from Ohio

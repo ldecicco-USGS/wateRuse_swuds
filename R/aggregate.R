@@ -2,7 +2,7 @@
 #'
 #' Allows user to aggregate their data from SWUDS by user-defined parameters.
 #'
-#' @param s_wuds dataframe, the swuds water use data
+#' @param s_wuds swuds object (data frame from melt function)
 #' @param aquifer chr, the aquifer of interest to be aggregated
 #' @param sum_avg chr, user selects either "sum" or "avg" and the sum
 #' or average will be computed
@@ -15,18 +15,26 @@
 #' sum_avg <- "sum"
 #' test_aquifer <- aggregate_aquifier(s_wuds, aquifer, sum_avg)
 aggregate_aquifier <- function(s_wuds, aquifer, sum_avg){
+  
+  if(!("swuds" %in% class(s_wuds))){
+    s_wuds <- as_swuds(s_wuds)
+  }
+  
   if (!("aquifer" %in% names(s_wuds))){
     message("no aquifer column")
     return(NULL)
   }
+
+  match.arg(sum_avg, c("sum","avg"))
+  
   s_wuds <- s_wuds[s_wuds$aquifer %in% aquifer, ]
-  s_wuds$Volume_mgd <- as.numeric(s_wuds$Volume_mgd)
+  
   if (sum_avg == "sum"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(aquifer = s_wuds$aquifer),
                         FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(aqiufer = s_wuds$aquifer),
                         FUN = mean, na.rm = TRUE)
   }
@@ -45,13 +53,13 @@ aggregate_aquifier <- function(s_wuds, aquifer, sum_avg){
 aggregate_county <- function(s_wuds, state_county, sum_avg){
   s_wuds$state_county <- paste0(s_wuds$FROM_STATE_CD, s_wuds$FROM_COUNTY_CD)
   s_wuds <- s_wuds[s_wuds$state_county %in% state_county, ]
-  s_wuds$Volume_mgd <- as.numeric(s_wuds$Volume_mgd)
+  
   if (sum_avg == "sum"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(state_county = s_wuds$state_county),
                         FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(state_county = s_wuds$state_county),
                         FUN = mean, na.rm = TRUE)
   }
@@ -70,13 +78,13 @@ aggregate_HUC <- function(s_wuds, HUC, sum_avg){
     return(NULL)
   }
   s_wuds <- s_wuds[s_wuds$FROM_HUC_CD %in% HUC, ]
-  s_wuds$Volume_mgd <- as.numeric(s_wuds$Volume_mgd)
+  
   if (sum_avg == "sum"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(HUC = s_wuds$FROM_HUC_CD),
                         FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(HUC = s_wuds$FROM_HUC_CD),
                         FUN = mean, na.rm = TRUE)
   }
@@ -92,13 +100,13 @@ aggregate_HUC <- function(s_wuds, HUC, sum_avg){
 #' test_month <- aggregate_month(s_wuds, month, sum_avg)
 aggregate_month <- function(s_wuds, month, sum_avg){
   s_wuds <- s_wuds[s_wuds$Month %in% month, ]
-  s_wuds$Volume_mgd <- as.numeric(s_wuds$Volume_mgd)
+  
   if (sum_avg == "sum"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(Month = s_wuds$Month),
                         FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(Month = s_wuds$Month),
                         FUN = mean, na.rm = TRUE)
   }
@@ -115,35 +123,35 @@ aggregate_season <- function(s_wuds, season, sum_avg){
   if (season == "Winter" && sum_avg == "sum"){
     #get Winter sum
     s_wuds <- s_wuds[s_wuds$Month %in% c("Jan", "Feb", "Mar"), ]
-    s_wuds$winter_sum <- sum(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$winter_sum <- sum(s_wuds$Volume_mgd, na.rm = TRUE)
   } else if (season == "Winter" && sum_avg == "avg"){
     #get Winter avg
     s_wuds <- s_wuds[s_wuds$Month %in% c("Jan", "Feb", "Mar"), ]
-    s_wuds$winter_avg <- mean(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$winter_avg <- mean(s_wuds$Volume_mgd, na.rm = TRUE)
   } else if (season == "Spring" && sum_avg == "sum"){
     #get Spring sum
     s_wuds <- s_wuds[s_wuds$Month %in% c("Mar", "Apr", "May"), ]
-    s_wuds$spring_sum <- sum(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$spring_sum <- sum(s_wuds$Volume_mgd, na.rm = TRUE)
   } else if (season == "Spring" && sum_avg == "avg"){
     #get Spring avg
     s_wuds <- s_wuds[s_wuds$Month %in% c("Mar", "Apr", "May"), ]
-    s_wuds$spring_avg <- mean(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$spring_avg <- mean(s_wuds$Volume_mgd, na.rm = TRUE)
   } else if (season == "Summer" && sum_avg == "sum"){
     #get Summer sum
     s_wuds <- s_wuds[s_wuds$Month %in% c("Jun", "Jul", "Aug"), ]
-    s_wuds$summer_sum <- sum(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$summer_sum <- sum(s_wuds$Volume_mgd, na.rm = TRUE)
   } else if (season == "Summer" && sum_avg == "avg"){
     #get Summer avg
     s_wuds <- s_wuds[s_wuds$Month %in% c("Jun", "Jul", "Aug"), ]
-    s_wuds$summer_avg <- mean(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$summer_avg <- mean(s_wuds$Volume_mgd, na.rm = TRUE)
   } else if (season == "Fall" && sum_avg == "sum"){
     #get Fall sum
     s_wuds <- s_wuds[s_wuds$Month %in% c("Sep", "Oct", "Nov"), ]
-    s_wuds$fall_sum <- sum(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$fall_sum <- sum(s_wuds$Volume_mgd, na.rm = TRUE)
   } else if (season == "Fall" && sum_avg == "avg"){
     #get Fall avg
     s_wuds <- s_wuds[s_wuds$Month %in% c("Sep", "Oct", "Nov"), ]
-    s_wuds$fall_avg <- mean(as.numeric(s_wuds$Volume_mgd), na.rm = TRUE)
+    s_wuds$fall_avg <- mean(s_wuds$Volume_mgd, na.rm = TRUE)
   }
   return(s_wuds)
 }
@@ -156,13 +164,13 @@ aggregate_season <- function(s_wuds, season, sum_avg){
 #' test_year <- aggregate_year(s_wuds, year, sum_avg)
 aggregate_year <- function(s_wuds, year, sum_avg){
   s_wuds <- s_wuds[s_wuds$YEAR %in% year, ]
-  s_wuds$Volume_mgd <- as.numeric(s_wuds$Volume_mgd)
+  
   if (sum_avg == "sum"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(Year = s_wuds$YEAR),
                         FUN = sum, na.rm = TRUE)
   } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(as.numeric(s_wuds$Volume_mgd),
+    s_wuds <- aggregate(s_wuds$Volume_mgd,
                         by = list(Year = s_wuds$YEAR),
                         FUN = mean, na.rm = TRUE)
   }
