@@ -56,7 +56,7 @@ df_melt <- swuds_sample
 
 Let's look at "AS" sites in August:
 
-```{r mapit}
+```{r mapit, eval = FALSE}
 
 s_wuds <- df_melt[which(df_melt$FROM_SITE_TP_CD == "AS" &
                           df_melt$Month_num == 8), ]
