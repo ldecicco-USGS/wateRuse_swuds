@@ -1,7 +1,9 @@
 #' Read Excel file Water Quantity
 #'
-#' Function to read in SWUDS Water Quantity Excel and SWUDS Population Served Excel
-#' file into a dataframe and converts column names to NWIS codes using a lookup table.
+#' Function to read in SWUDS Water Quantity Excel and
+#' SWUDS Population Served Excel
+#' file into a dataframe and converts column names
+#' to NWIS codes using a lookup table.
 #' @param file_path path to Excel file
 #' @export
 #' @rdname importers

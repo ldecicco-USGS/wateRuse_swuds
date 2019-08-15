@@ -16,11 +16,11 @@
 #' summary(swuds_1)
 create_swuds <- function(path_pop, path_quant, ...){
    
-  if(!file.exists(path_pop)){
+  if (!file.exists(path_pop)){
     stop("Population file does not exist, check path and spelling")
   }
   
-  if(!file.exists(path_quant)){
+  if (!file.exists(path_quant)){
     stop("Quantity file does not exist, check path and spelling")
   }
   
@@ -38,7 +38,7 @@ create_swuds <- function(path_pop, path_quant, ...){
 #' @param object swuds object
 summary.swuds <- function(object, ...){
   
-  print(utils::head(object[,1:3]))
+  print(utils::head(object[, 1:3]))
 
 }
 
@@ -48,7 +48,7 @@ summary.swuds <- function(object, ...){
 #' @param dq data frame quanity
 as_swuds <- function(dq, dp=NULL){
   
-  if(is.null(dp)){
+  if (is.null(dp)){
     df_melt <- dq
   } else {
     df <- merge_dq_dp(dq = dq, dp = dp)
@@ -58,7 +58,7 @@ as_swuds <- function(dq, dp=NULL){
   required_columns <- c("Volume_mgd")
   
   # Check on some important columns:
-  if(!(required_columns %in% names(df_melt))){
+  if (!(required_columns %in% names(df_melt))){
     stop("Missing columns: ",
          paste0(required_columns[!(required_columns %in% names(df_melt))],
                collapse = ", "))
@@ -67,8 +67,7 @@ as_swuds <- function(dq, dp=NULL){
   # Check important column types:
   df_melt$Volume_mgd <- as.numeric(df_melt$Volume_mgd)
   
-  class(df_melt) <- c("swuds",class(df_melt))
+  class(df_melt) <- c("swuds", class(df_melt))
   
   return(df_melt)
 }
-
