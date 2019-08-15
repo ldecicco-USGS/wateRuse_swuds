@@ -16,8 +16,10 @@ read_swuds_pop(file_path)
 data frame
 }
 \description{
-Function to read in SWUDS Water Quantity Excel and SWUDS Population Served Excel
-file into a dataframe and converts column names to NWIS codes using a lookup table.
+Function to read in SWUDS Water Quantity Excel and
+SWUDS Population Served Excel
+file into a dataframe and converts column names
+to NWIS codes using a lookup table.
 }
 \examples{
 sample_path <- system.file("extdata",package = "wateRuseSWUDS")

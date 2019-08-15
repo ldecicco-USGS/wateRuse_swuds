@@ -55,17 +55,25 @@ as_swuds <- function(dq, dp=NULL){
     df_melt <- melt_water_quant_pop(df)
   }
   
-  required_columns <- c("Volume_mgd")
+  required_columns <- c("Volume_mgd", "FROM_STATE_CD",
+                        "FROM_COUNTY_CD", "Month", "YEAR")
   
   # Check on some important columns:
-  if (!(required_columns %in% names(df_melt))){
+  if (!all(required_columns %in% names(df_melt))){
     stop("Missing columns: ",
          paste0(required_columns[!(required_columns %in% names(df_melt))],
                collapse = ", "))
   }
   
-  # Check important column types:
+  # Check or create important column types:
   df_melt$Volume_mgd <- as.numeric(df_melt$Volume_mgd)
+  
+  df_melt$season <- "Winter"
+  df_melt$season[df_melt$Month %in% c("Mar", "Apr", "May")] <- "Spring"
+  df_melt$season[df_melt$Month %in% c("Jun", "Jul", "Aug")] <- "Summer"
+  df_melt$season[df_melt$Month %in% c("Sep", "Oct", "Nov")] <- "Fall"
+  
+  df_melt$state_county <- paste0(df_melt$FROM_STATE_CD, df_melt$FROM_COUNTY_CD)
   
   class(df_melt) <- c("swuds", class(df_melt))
   

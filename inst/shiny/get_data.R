@@ -7,9 +7,9 @@ observeEvent(input$example_data, {
 })
 
 observeEvent(input$merge_data, {
-  df <- merge_dq_dp(raw_data$dataQUANT,
+  df <- as_swuds(raw_data$dataQUANT,
                     raw_data$dataPOP)
-  raw_data$data <- melt_water_quant_pop(df)
+  raw_data$data <- df
 })
 
 observeEvent(input$dataPOP, {

@@ -3,7 +3,6 @@
 #' Allows user to aggregate their data from SWUDS by user-defined parameters.
 #'
 #' @param s_wuds swuds object (data frame from melt function)
-#' @param aquifer chr, the aquifer of interest to be aggregated
 #' @param sum_avg chr, user selects either "sum" or "avg" and the sum
 #' or average will be computed
 #' @export
@@ -11,107 +10,37 @@
 #' @importFrom stats aggregate
 #' @examples
 #' s_wuds <- swuds_sample #example data from Ohio
-#' aquifer <- "TBD"
-#' sum_avg <- "sum"
-#' test_aquifer <- aggregate_aquifier(s_wuds, aquifer, sum_avg)
-aggregate_aquifier <- function(s_wuds, aquifer, sum_avg){
-  
-  if(!("swuds" %in% class(s_wuds))){
+#' test_all_huc <- aggregate_swuds(s_wuds, "FROM_HUC_CD")
+#' test_some_huc <- aggregate_swuds(s_wuds, "FROM_HUC_CD",
+#' c("041000040104", "050600020105"))
+#' test_some_years <- aggregate_swuds(s_wuds, "YEAR", c("1995", "2004"))
+#' #test_some_aquifers <- aggregate_swuds(s_wuds, "aquifer", "TBD")
+#' test_some_months <- aggregate_swuds(s_wuds, "Month", c("Jan", "Feb"))
+#' test_some_state_county <- aggregate_swuds(s_wuds, "state_county", "39033")
+#' test_some_seasons <- aggregate_swuds(s_wuds, "season", "Fall")
+aggregate_swuds <- function(s_wuds,
+                            filter_by, filter_val = NA,
+                            aggregate_by = "Volume_mgd"){
+  if (!("swuds" %in% class(s_wuds))){
     s_wuds <- as_swuds(s_wuds)
   }
-  
-  if (!("aquifer" %in% names(s_wuds))){
-    message("no aquifer column")
-    return(NULL)
-  }
 
-  match.arg(sum_avg, c("sum","avg"))
-  
-  s_wuds <- s_wuds[s_wuds$aquifer %in% aquifer, ]
-  
-  if (sum_avg == "sum"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(aquifer = s_wuds$aquifer),
-                        FUN = sum, na.rm = TRUE)
-  } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(aqiufer = s_wuds$aquifer),
-                        FUN = mean, na.rm = TRUE)
+  if (!(filter_by %in% names(s_wuds))){
+    stop("Requested filter column: ", filter_by, " not in data")
   }
-  return(s_wuds)
+  
+  if (!all(is.na(filter_val))){
+    s_wuds <- s_wuds[s_wuds[[filter_by]]  %in% filter_val, ]
+  }
+  
+  s_wuds_ag <- dplyr::group_by(s_wuds, !!sym(filter_by))
+  s_wuds_ag <- dplyr::summarise(s_wuds_ag,
+                                avg = mean(!!sym(aggregate_by), na.rm = TRUE),
+                                sum = sum(!!sym(aggregate_by), na.rm = TRUE))
+  
+  return(s_wuds_ag)
 }
 
-
-#' @export
-#' @rdname aggregate
-#' @param state_county chr, the county of interest to be aggregated.
-#' State abbreviation is also
-#' appended to the beginning of the county
-#' @examples
-#' state_county <- "39033"
-#' test_county <- aggregate_county(s_wuds, state_county, sum_avg)
-aggregate_county <- function(s_wuds, state_county, sum_avg){
-  s_wuds$state_county <- paste0(s_wuds$FROM_STATE_CD, s_wuds$FROM_COUNTY_CD)
-  s_wuds <- s_wuds[s_wuds$state_county %in% state_county, ]
-  
-  if (sum_avg == "sum"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(state_county = s_wuds$state_county),
-                        FUN = sum, na.rm = TRUE)
-  } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(state_county = s_wuds$state_county),
-                        FUN = mean, na.rm = TRUE)
-  }
-  return(s_wuds)
-}
-
-#' @export
-#' @param HUC chr, the HUC of interest to be aggregated
-#' @rdname aggregate
-#' @examples
-#' HUC <- c("041000040104", "050600020105")
-#' test_HUC <- aggregate_HUC(s_wuds, HUC, sum_avg)
-aggregate_HUC <- function(s_wuds, HUC, sum_avg){
-  if (!("FROM_HUC_CD" %in% names(s_wuds))){
-    message("no aquifer column")
-    return(NULL)
-  }
-  s_wuds <- s_wuds[s_wuds$FROM_HUC_CD %in% HUC, ]
-  
-  if (sum_avg == "sum"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(HUC = s_wuds$FROM_HUC_CD),
-                        FUN = sum, na.rm = TRUE)
-  } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(HUC = s_wuds$FROM_HUC_CD),
-                        FUN = mean, na.rm = TRUE)
-  }
-  return(s_wuds)
-}
-
-#' @export
-#' @rdname aggregate
-#' @param month chr, the month of interest to be aggregated in abb
-#' format (i.e. Jan, Feb, etc.)
-#' @examples
-#' month <- c("Jan", "Feb")
-#' test_month <- aggregate_month(s_wuds, month, sum_avg)
-aggregate_month <- function(s_wuds, month, sum_avg){
-  s_wuds <- s_wuds[s_wuds$Month %in% month, ]
-  
-  if (sum_avg == "sum"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(Month = s_wuds$Month),
-                        FUN = sum, na.rm = TRUE)
-  } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(Month = s_wuds$Month),
-                        FUN = mean, na.rm = TRUE)
-  }
-  return(s_wuds)
-}
 
 #' @export
 #' @rdname aggregate
@@ -152,27 +81,6 @@ aggregate_season <- function(s_wuds, season, sum_avg){
     #get Fall avg
     s_wuds <- s_wuds[s_wuds$Month %in% c("Sep", "Oct", "Nov"), ]
     s_wuds$fall_avg <- mean(s_wuds$Volume_mgd, na.rm = TRUE)
-  }
-  return(s_wuds)
-}
-
-#' @export
-#' @rdname aggregate
-#' @param year numeric, the year of interest to be aggregated
-#' @examples
-#' year <- c("1995", "2004")
-#' test_year <- aggregate_year(s_wuds, year, sum_avg)
-aggregate_year <- function(s_wuds, year, sum_avg){
-  s_wuds <- s_wuds[s_wuds$YEAR %in% year, ]
-  
-  if (sum_avg == "sum"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(Year = s_wuds$YEAR),
-                        FUN = sum, na.rm = TRUE)
-  } else if (sum_avg == "avg"){
-    s_wuds <- aggregate(s_wuds$Volume_mgd,
-                        by = list(Year = s_wuds$YEAR),
-                        FUN = mean, na.rm = TRUE)
   }
   return(s_wuds)
 }
