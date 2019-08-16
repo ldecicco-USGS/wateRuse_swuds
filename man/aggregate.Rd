@@ -2,13 +2,10 @@
 % Please edit documentation in R/aggregate.R
 \name{aggregate_swuds}
 \alias{aggregate_swuds}
-\alias{aggregate_season}
 \title{aggregate functions}
 \usage{
 aggregate_swuds(s_wuds, filter_by, filter_val = NA,
   aggregate_by = "Volume_mgd")
-
-aggregate_season(s_wuds, season, sum_avg)
 }
 \arguments{
 \item{s_wuds}{swuds object (data frame from melt function)}
@@ -18,10 +15,6 @@ aggregate_season(s_wuds, season, sum_avg)
 \item{filter_val}{values to filter to}
 
 \item{aggregate_by}{column to aggregate. Defaults to "Volume_mgd"}
-
-\item{season}{chr, the aquifer of interest to be aggregated}
-
-\item{sum_avg}{char sum or avg}
 }
 \description{
 Allows user to aggregate their data from SWUDS by user-defined parameters.
@@ -36,6 +29,4 @@ test_some_years <- aggregate_swuds(s_wuds, "YEAR", c("1995", "2004"))
 test_some_months <- aggregate_swuds(s_wuds, "Month", c("Jan", "Feb"))
 test_some_state_county <- aggregate_swuds(s_wuds, "state_county", "39033")
 test_some_seasons <- aggregate_swuds(s_wuds, "season", "Fall")
-season <- "Fall"
-test_aggSeason <- aggregate_season(s_wuds, season, sum_avg)
 }
