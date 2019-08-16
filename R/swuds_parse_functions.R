@@ -1,15 +1,20 @@
 #' Read Excel file Water Quantity
 #'
-#' Function to read in SWUDS Water Quantity Excel file into a dataframe
-#' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
+#' Function to read in SWUDS Water Quantity Excel and
+#' SWUDS Population Served Excel
+#' file into a dataframe and converts column names
+#' to NWIS codes using a lookup table.
 #' @param file_path path to Excel file
 #' @export
+#' @rdname importers
 #' @importFrom readxl read_xlsx
 #' @return data frame
 #' @examples
-#' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-#' df <- read_swuds_quant(file.path(pathToSample,
+#' sample_path <- system.file("extdata",package = "wateRuseSWUDS")
+#' df <- read_swuds_quant(file.path(sample_path,
 #'          "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
+#' dp <- read_swuds_pop(file.path(sample_path,
+#'          "OHpopserved_output.xlsx"))
 read_swuds_quant <- function(file_path){
   dq <- readxl::read_xlsx(path = file_path,
                           guess_max = 2000,
@@ -21,15 +26,8 @@ read_swuds_quant <- function(file_path){
   return(dq)
 }
 
-#' Function to read in SWUDS Population Served Excel file into a dataframe
-#' and converts column names to NWIS codes using a lookup table nwis_lookup.xlsx
-#'
-#' @param file_path path to file
 #' @export
-#' @importFrom readxl read_xlsx
-#' @examples
-#' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
-#' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
+#' @rdname importers
 read_swuds_pop <- function(file_path){
   dp <- readxl::read_xlsx(path = file_path,
                           guess_max = 2000)
@@ -79,23 +77,13 @@ merge_dq_dp <- function(dq, dp){
 #' df <- merge_dq_dp(dq, dp)
 #' df_melt <- melt_water_quant_pop(df)
 melt_water_quant_pop <- function(df_in){
+  
   names(df_in)[names(df_in) %in%
                  paste0(toupper(month.abb), "_VAL")] <- month.abb
-  # df_melt <- dplyr::rename(df_in,
-  #                          Jan = JAN_VAL,
-  #                          Feb = FEB_VAL,
-  #                          Mar = MAR_VAL,
-  #                          Apr = APR_VAL,
-  #                          May = MAY_VAL,
-  #                          Jun = JUN_VAL,
-  #                          Jul = JUL_VAL,
-  #                          Aug = AUG_VAL,
-  #                          Sep = SEP_VAL,
-  #                          Oct = OCT_VAL,
-  #                          Nov = NOV_VAL,
-  #                          Dec = DEC_VAL)
+  
   Month <- Volume_mgd <- ".dplyr"
   Jan <- Dec <- ".dplyr"
+  
   df_melt <- tidyr::gather(df_in, Month, Volume_mgd, Jan:Dec)
   df_melt$Month_num <- match(df_melt$Month, month.abb)
   df_melt$Month_num <- ifelse(df_melt$Month_num < 10,
