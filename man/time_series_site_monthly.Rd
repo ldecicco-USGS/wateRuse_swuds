@@ -10,14 +10,12 @@ time_series_site_monthly(s_wuds, FROM_SITE_NUM)
 \item{s_wuds}{dataframe, the swuds water use data}
 
 \item{FROM_SITE_NUM}{chr, site number agency and site_no unigue to site}
-
-\item{FROM_AGENCY_CD}{chr, agency code}
 }
 \description{
 Plot water use monthly (volume_mgd) overlaying multiple years
 }
 \examples{
 s_wuds <- swuds_sample #example data from Ohio
-FROM_SITE_NUM<-c("410233083375001")
+FROM_SITE_NUM <- c("410233083375001")
 testp2 <- time_series_site_monthly(s_wuds, FROM_SITE_NUM)
 }
