@@ -32,4 +32,26 @@ shiny::shinyServer(function(input, output, session) {
   
   source("get_data.R",local=TRUE)$value
   
+  output$hasData <- reactive(!is.null(melted_data()))
+  outputOptions(output, "hasData", suspendWhenHidden = FALSE)
+  
+  observe({
+    updateSelectInput(session, "sites", choices = unique(melted_data()$FROM_SITE_NO))
+  })
+  
+  output$monthly_timeseries <- renderPlot({
+    
+    validate(
+      need(!is.null(raw_data$data), "Please select a data set")
+    )
+    
+    if(input$sites != "All"){
+      month_plot <- time_series_site_monthly(melted_data(),
+                             input$sites)
+      return(month_plot)
+    }
+    
+    
+  })
+  
 })

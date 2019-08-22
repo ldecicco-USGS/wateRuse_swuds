@@ -20,6 +20,12 @@ sidebar <- dashboardSidebar(
     fileInput("dataQUANT", "Load Quantity Data File",multiple = FALSE),
     actionButton("merge_data", label = "Merge Data"),
     actionButton("example_data", label = "Load Example Data"),
+    conditionalPanel(
+      condition = "output.hasData == true",
+      selectInput("sites", label = "From Site:", 
+                  choices = "All",
+                  selected = "All", multiple = FALSE)
+    ),
     menuItem("Source code", icon = icon("file-code-o"), 
              href = "https://github.com/USGS-R/wateRuse_swuds/tree/master/inst/shiny")
   )
@@ -34,6 +40,10 @@ body <- dashboardBody(
          tabPanel(title = tagList("Table", shiny::icon("bars")),
                   value = "table",
                   shinycssloaders::withSpinner(DT::dataTableOutput('show_table'))
+         ),
+         tabPanel(title = tagList("Monthly Timeseries", shiny::icon("bar-chart")),
+                  value = "month_plot",
+                  shinycssloaders::withSpinner(plotOutput('monthly_timeseries'))
          )
          
   ),
