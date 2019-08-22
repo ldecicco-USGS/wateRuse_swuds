@@ -1,4 +1,4 @@
-# wateRuseSWUDS (development version)
+# Version 0.0.1
 
 ## New Features
 
@@ -8,5 +8,5 @@
 
 * Highly experimental
 
-# No previous versions 
+
 
