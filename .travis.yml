@@ -7,7 +7,9 @@
 language: r
 r: release
 cache: packages
-
+repos:
+  CRAN: https://cloud.r-project.org
+  
 addons:
   apt:
     packages:
@@ -21,9 +23,11 @@ env:
 warnings_are_errors: true
 r_check_args: --as-cran 
 
+r_packages:
+ - covr
+ - lintr
+
 r_github_packages:
-  - jimhester/covr
-  - jimhester/lintr
   - USGS-R/wateRuse
 
 after_success:
