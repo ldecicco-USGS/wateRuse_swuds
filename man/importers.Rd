@@ -22,7 +22,7 @@ file into a dataframe and converts column names
 to NWIS codes using a lookup table.
 }
 \examples{
-sample_path <- system.file("extdata",package = "wateRuseSWUDS")
+sample_path <- system.file("extdata",package = "WUReview")
 df <- read_swuds_quant(file.path(sample_path,
          "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 dp <- read_swuds_pop(file.path(sample_path,

@@ -14,7 +14,7 @@ Function to create month, year, month#, day, date, decimal date, and water
 year to the mergeWaterQuantPopServe data frame
 }
 \examples{
-pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
+pathToSample <- system.file("extdata",package = "WUReview")
 dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 dq <- read_swuds_quant(file.path(pathToSample,
               "OH_CTF_SW_monthly_permit_sample_data.xlsx"))

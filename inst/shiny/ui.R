@@ -1,9 +1,9 @@
-library(wateRuseSWUDS)
+library(WUReview)
 library(dplyr)
 library(shiny)
 library(shinydashboard)
 
-header <- dashboardHeader(title = "wateRuseSWUDS",
+header <- dashboardHeader(title = "WUReview",
                           tags$li(class = "dropdown", tags$button(
                             id = 'close',
                             type = "button",
@@ -11,7 +11,7 @@ header <- dashboardHeader(title = "wateRuseSWUDS",
                             style='color: #000000; 
                             margin-right:13px;margin-top:7px;margin-bottom:7px',
                             onclick = "setTimeout(function(){window.close();},500);",  # close browser
-                            "Stop wateRuseSWUDS"
+                            "Stop WUReview"
                           )))
 
 sidebar <- dashboardSidebar(

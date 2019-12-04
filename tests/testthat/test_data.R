@@ -6,7 +6,7 @@ test_that("Data", {
   expect_equal(ncol(swuds_sample), 154)
   
   # Test loading:
-  path_to_sample <- system.file("extdata", package = "wateRuseSWUDS")
+  path_to_sample <- system.file("extdata", package = "WUReview")
   
   # Read in the water quantity table
   dq <- read_swuds_quant(file.path(path_to_sample,

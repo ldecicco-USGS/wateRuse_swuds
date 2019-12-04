@@ -1,4 +1,4 @@
-Package: wateRuseSWUDS
+Package: WUReview
 Type: Package
 Title: Site-Specific Water-Use Data System
 Version: 0.0.1
@@ -49,8 +49,7 @@ BuildVignettes: true
 VignetteBuilder: knitr
 BugReports: https://github.com/USGS-R/wateruse_swuds/issues
 URL: https://github.com/USGS-R/wateruse_swuds
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 LazyLoad: yes
 LazyData: yes
 Remotes: USGS-R/wateRuse
-

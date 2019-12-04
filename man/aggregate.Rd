@@ -4,8 +4,12 @@
 \alias{aggregate_swuds}
 \title{aggregate functions}
 \usage{
-aggregate_swuds(s_wuds, filter_by, filter_val = NA,
-  aggregate_by = "Volume_mgd")
+aggregate_swuds(
+  s_wuds,
+  filter_by,
+  filter_val = NA,
+  aggregate_by = "Volume_mgd"
+)
 }
 \arguments{
 \item{s_wuds}{swuds object (data frame from melt function)}

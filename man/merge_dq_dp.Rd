@@ -16,7 +16,7 @@ Function to merge Water Quantity and Population Served data frames into one
 by "to_agency code", "to_site_no", "Year"
 }
 \examples{
-pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
+pathToSample <- system.file("extdata",package = "WUReview")
 dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 dq <- read_swuds_quant(file.path(pathToSample,
               "OH_CTF_SW_monthly_permit_sample_data.xlsx"))

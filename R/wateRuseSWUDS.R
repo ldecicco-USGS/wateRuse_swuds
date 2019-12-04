@@ -7,10 +7,10 @@
     collapse = "\n"))
 }
 
-#' wateRuseSWUDS
+#' WUReview
 #'
 #' \tabular{ll}{
-#' Package: \tab wateRuseSWUDS\cr
+#' Package: \tab WUReview\cr
 #' Type: \tab Package\cr
 #' License: \tab Unlimited for this package, dependencies have more
 #' restrictive licensing.\cr
@@ -19,7 +19,7 @@
 #'
 #' Collection of functions to help parse and analyze AWUDS data.
 #'
-#' @name wateRuseSWUDS-package
+#' @name WUReview-package
 #' @docType package
 NULL
 

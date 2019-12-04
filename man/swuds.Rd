@@ -29,7 +29,7 @@ as_swuds(dq, dp = NULL)
 Load and check swuds data
 }
 \examples{
-path_to_data <-  system.file("extdata", package="wateRuseSWUDS")
+path_to_data <-  system.file("extdata", package="WUReview")
 file_name_1 <- "OH_CTF_SW_monthly_permit_sample_data.xlsx"
 file_name_2 <- "OHpopserved_output.xlsx"
 excel_path_quant <- file.path(path_to_data, file_name_1)

@@ -10,7 +10,7 @@
 #' @importFrom readxl read_xlsx
 #' @return data frame
 #' @examples
-#' sample_path <- system.file("extdata",package = "wateRuseSWUDS")
+#' sample_path <- system.file("extdata",package = "WUReview")
 #' df <- read_swuds_quant(file.path(sample_path,
 #'          "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
 #' dp <- read_swuds_pop(file.path(sample_path,
@@ -47,7 +47,7 @@ read_swuds_pop <- function(file_path){
 #' @importFrom dplyr left_join
 #' @export
 #' @examples
-#' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
+#' pathToSample <- system.file("extdata",package = "WUReview")
 #' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 #' dq <- read_swuds_quant(file.path(pathToSample,
 #'               "OH_CTF_SW_monthly_permit_sample_data.xlsx"))
@@ -70,7 +70,7 @@ merge_dq_dp <- function(dq, dp){
 #' @importFrom tidyr gather
 #' @export
 #' @examples
-#' pathToSample <- system.file("extdata",package = "wateRuseSWUDS")
+#' pathToSample <- system.file("extdata",package = "WUReview")
 #' dp <- read_swuds_pop(file.path(pathToSample,"OHpopserved_output.xlsx"))
 #' dq <- read_swuds_quant(file.path(pathToSample,
 #'               "OH_CTF_SW_monthly_permit_sample_data.xlsx"))

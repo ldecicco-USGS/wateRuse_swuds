@@ -4,8 +4,15 @@
 \alias{map_sites}
 \title{map_sites}
 \usage{
-map_sites(s_wuds, data_element, year, state, norm_element = NA,
-  unit_type = "county", site_from_to = "from")
+map_sites(
+  s_wuds,
+  data_element,
+  year,
+  state,
+  norm_element = NA,
+  unit_type = "county",
+  site_from_to = "from"
+)
 }
 \arguments{
 \item{s_wuds}{dataframe, the swuds water use data}
