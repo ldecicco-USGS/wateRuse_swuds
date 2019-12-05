@@ -1,0 +1,13 @@
+image: rocker/rstudio
+
+test:
+  script:
+    - R -e 'install.packages(c("testthat","covr","lintr"))'
+    - R -e 'devtools::install_github("USGS-R/wateRuse")'
+    - R CMD build . --no-build-vignettes --no-manual
+    - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
+    - R CMD check "${PKG_FILE_NAME}" --no-build-vignettes --no-manual
+
+after_script:
+  - R -e 'cov <- covr::codecov(clean = FALSE)' -e 'print(cov)' -e 'covr::codecov(coverage = cov)'
+  - R -e 'lintr::lint_package()'
