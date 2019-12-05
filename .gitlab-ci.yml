@@ -1,4 +1,4 @@
-image: r-base
+image: rocker/tidyverse
 
 stages:
   - build
@@ -6,7 +6,7 @@ stages:
   - test
 
 before_script:
-  - R -e 'install.packages(c("testthat","covr","lintr","devtools"))'
+  - R -e 'install.packages(c("lintr"))'
 
 buildsource:
   stage: build
