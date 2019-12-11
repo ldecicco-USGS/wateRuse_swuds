@@ -12,7 +12,8 @@
 #' \dontrun{
 #' explore_swuds()
 #' }
-explore_swuds <- function(browse=TRUE){
+explore_swuds <- function(browse = TRUE) {
+  
   shiny::runApp(system.file("shiny", package = "WUReview"),
                 launch.browser = browse)
 }

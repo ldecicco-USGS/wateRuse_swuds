@@ -5,4 +5,5 @@ linters: with_defaults(
   object_name_linter = NULL,
   object_usage_linter = NULL,
   trailing_whitespace_linter = NULL,
+  paren_brace_linter = NULL,
   snake_case_linter = NULL)
