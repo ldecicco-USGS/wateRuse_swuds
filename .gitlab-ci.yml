@@ -1,0 +1,28 @@
+image: rocker/tidyverse
+
+stages:
+  - build
+  - check
+  - test
+
+before_script:
+  - R -e 'install.packages(c("lintr"))'
+
+buildsource:
+  stage: build
+  script:
+    - R CMD build . --no-build-vignettes --no-manual
+
+checkerrors:
+  stage: check
+  script:
+    - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
+    - R CMD check "${PKG_FILE_NAME}" --no-build-vignettes --no-manual
+
+codecov:
+  stage: test
+  script:
+    - r -e 'covr::codecov()'
+
+after_script:
+  - R -e 'lintr::lint_package()'
