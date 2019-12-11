@@ -6,7 +6,8 @@ stages:
   - test
 
 before_script:
-  - R -e 'install.packages(c("lintr"))'
+  - R -e 'install.packages(c("lintr","ggthemes", "sp", "mapproj", "maps", "maptools", "rgeos", "shinycssloaders", "shinydashboard"))'
+  - R -e 'devtools::install_github("USGS-R/wateRuse")'
 
 buildsource:
   stage: build
