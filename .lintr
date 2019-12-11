@@ -2,6 +2,8 @@ linters: with_defaults(
     trailing_whitespace_linter = NULL, # 86
     paren_brace_linter = NULL, # 27
     object_name_linter = NULL, # 26
+    object_usage_linter = NULL,
+    snake_case_linter = NULL,
     line_length_linter = NULL, # 10
     commas_linter = NULL, # 5
     single_quotes_linter = NULL, # 5
