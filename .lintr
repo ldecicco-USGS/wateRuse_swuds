@@ -1,9 +1,34 @@
-exclusions: list("inst/shiny/ui.R", "inst/shiny/server.R")
-  
 linters: with_defaults(
-  camel_case_linter = NULL,
-  object_name_linter = NULL,
-  object_usage_linter = NULL,
-  trailing_whitespace_linter = NULL,
-  paren_brace_linter = NULL,
-  snake_case_linter = NULL)
+    trailing_whitespace_linter = NULL, # 86
+    paren_brace_linter = NULL, # 27
+    object_name_linter = NULL, # 26
+    line_length_linter = NULL, # 10
+    commas_linter = NULL, # 5
+    single_quotes_linter = NULL, # 5
+    infix_spaces_linter = NULL, # 2
+    open_curly_linter = NULL, # 2
+    spaces_left_parentheses_linter = NULL, # 1
+    dummy_linter = NULL
+  )
+exclusions: list(
+    "data/swuds_sample.RData",
+    "man/aggregate.Rd",
+    "man/explore_swuds.Rd",
+    "man/figures/logo.png",
+    "man/figures/pat.png",
+    "man/figures/save_pat.png",
+    "man/figures/swuds.png",
+    "man/importers.Rd",
+    "man/map_sites.Rd",
+    "man/melt_water_quant_pop.Rd",
+    "man/merge_dq_dp.Rd",
+    "man/subset_county_polygons.Rd",
+    "man/subset_huc_polygons.Rd",
+    "man/swuds.Rd",
+    "man/swuds_sample.Rd",
+    "man/time_series_site_monthly.Rd",
+    "man/WUReview-package.Rd",
+    "vignettes/Introduction.html",
+    "vignettes/Introduction.R",
+    "vignettes/Introduction.Rmd"
+  )
