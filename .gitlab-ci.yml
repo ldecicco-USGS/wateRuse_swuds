@@ -17,16 +17,23 @@ buildsource:
 
 checkerrors:
   stage: check
+  dependencies:
+    - build
+  when: on_success
   script:
-    - R -e 'devtools::check(document = FALSE, args = "--no-tests")'
+    - R -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors")'
 
 unittests:
   stage: test
+  dependencies:
+    - build
   script:
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
 
 codecov:
   stage: test
+  dependencies:
+    - build
   script:
     - R -e 'covr::codecov()'
 
