@@ -20,12 +20,29 @@ df <- merge_dq_dp(dq, dp)
 df_melt <- melt_water_quant_pop(df)
 ```
 
-## Pull requests
+## Contributing
 
+### Pull requests
 
 - Please run `lintr::lint_package()` before submitting a pull request.  
 - consider running `goodpractice::gp()` on the package before contributing.
 
+## Installation
+
+To install the package while the package is still internal, users will need to get a "Personal Access Token" from code.usgs.gov. 
+
+1. Go to https://code.chs.usgs.gov/profile/personal_access_tokens
+2. Create a Personal Access Token and click the "api" scope:
+![pat](man/figures/pat.png)
+3. After clicking the green "Create personal access token", you will see a screen like this:
+![pat](man/figures/save_pat.png)
+4. Save your token in a safe place (KeyPass for instance) so you don't need to constantly regenerate tokens. 
+5. In R, you can will need the `remotes` package to install:
+```r
+remotes::install_gitlab("water-use/wureview", 
+                        host = "code.chs.usgs.gov", 
+                        auth_token = "abc123")
+```
 
 ## Disclaimer
 
