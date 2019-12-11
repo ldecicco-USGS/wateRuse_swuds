@@ -5,6 +5,10 @@ stages:
   - check
   - test
 
+variables:
+  _R_CHECK_CRAN_INCOMING_: "false"
+  _R_CHECK_FORCE_SUGGESTS_: "true"
+
 before_script:
     - sudo apt-get install -y libgeos-dev
     - R -e 'install.packages(c("lintr","ggthemes", "sp", "mapproj", "maps", "maptools", "rgeos", "shinycssloaders", "shinydashboard"))'
@@ -18,7 +22,7 @@ buildsource:
 checkerrors:
   stage: check
   script:
-    - R -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors")'
+    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error")'
 
 unittests:
   stage: test
