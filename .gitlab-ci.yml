@@ -23,7 +23,7 @@ buildcheck:
     - R CMD build . --no-build-vignettes --no-manual
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error")'
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
-    - R -e 'covr::codecov()'
+    - R -e 'covr::package_coverage()'
     - R -e 'lintr::lint_package()'
 
     
