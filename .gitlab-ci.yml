@@ -22,18 +22,8 @@ buildcheck:
   script:
     - R CMD build . --no-build-vignettes --no-manual
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error")'
-
-unittests:
-  stage: check
-  script:
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
-
-codecov:
-  stage: check
-  script:
     - R -e 'covr::codecov()'
-
-style:
-  stage: check
-  script:
     - R -e 'lintr::lint_package()'
+
+    
