@@ -8,6 +8,7 @@ variables:
   _R_CHECK_FORCE_SUGGESTS_: "true"
   CODECOV_TOKEN: "CODECOV_TOKEN_STRING"
   APT_PKGS: "libgeos-dev"
+  CRAN_MIRROR: "https://cloud.r-project.org"
 
 before_script:
   - apt-get update
