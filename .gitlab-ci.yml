@@ -2,6 +2,7 @@ image: rocker/tidyverse
 
 stages:
   - check
+  - test
 
 variables:
   _R_CHECK_CRAN_INCOMING_: "false"
@@ -10,20 +11,37 @@ variables:
   APT_PKGS: "libgeos-dev"
   CRAN_MIRROR: "https://cloud.r-project.org"
 
-before_script:
-  - apt-get update
-  - apt-get install -y --no-install-recommends ${APT_PKGS}
-  - apt-get install -y --no-install-recommends qpdf pandoc pandoc-citeproc
-  - R -e 'install.packages(c("lintr","ggthemes", "sp", "mapproj", "maps", "maptools", "rgeos", "shinycssloaders", "shinydashboard"), repos = Sys.getenv("CRAN_MIRROR"))'
-  - R -e 'devtools::install_github("USGS-R/wateRuse",  repos = Sys.getenv("CRAN_MIRROR"))'
+
+getready:
+  stage: .pre
+  script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends ${APT_PKGS}
+    - apt-get install -y --no-install-recommends qpdf pandoc pandoc-citeproc
+    - R -e 'install.packages(c("lintr","ggthemes", "sp", "mapproj", "maps", "maptools", "rgeos", "shinycssloaders", "shinydashboard"), repos = Sys.getenv("CRAN_MIRROR"))'
+    - R -e 'devtools::install_github("USGS-R/wateRuse",  repos = Sys.getenv("CRAN_MIRROR"))'  
 
 buildcheck:
   stage: check
   script:
     - R CMD build . --no-build-vignettes --no-manual
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error")'
-    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
     - R -e 'lintr::lint_package()'
+    
+
+unittests:
+  stage: test
+  script:
+    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
+
+covertests:
+  stage: test
+  script:
     - R -e 'covr::package_coverage()'
 
+artifacts:
+  when: on_success
+  name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+  paths:
+    
     
