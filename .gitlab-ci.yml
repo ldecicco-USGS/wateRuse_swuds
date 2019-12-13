@@ -37,11 +37,13 @@ unittests:
 covertests:
   stage: test
   script:
-    - R -e 'covr::package_coverage()'
+    - R -e 'x <- covr::package_coverage();x'
+    - R -e 'write.table(percent_coverage(x), file = "test.txt", row.names = FALSE, col.names = FALSE)'
 
 artifacts:
   when: on_success
   name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+  expose_as: 'artifact 1'
   paths:
-    
+    - ['file.txt']
     
