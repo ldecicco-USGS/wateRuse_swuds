@@ -58,7 +58,6 @@ covertests:
     - R -e 'x <- covr::package_coverage();x'
     - R -e 'write.table(covr::percent_coverage(x), file = "test.txt", row.names = FALSE, col.names = FALSE)'
   artifacts:
-    path: 'test.txt'
+    path: 
+      - 'test.txt'
 
-
-    
