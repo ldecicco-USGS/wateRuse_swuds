@@ -26,6 +26,9 @@ getready:
   cache:
     paths:
      - $R_LIBS_USER
+  artifacts:
+    paths:
+     - $R_LIBS_USER
 
 buildcheck:
   stage: check
