@@ -30,6 +30,7 @@ getready:
 buildcheck:
   stage: check
   script:
+    - R -e  '.libPaths( Sys.getenv("R_LIBS_USER"))'
     - R CMD build . --no-build-vignettes --no-manual
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error")'
     - R -e 'lintr::lint_package()'
