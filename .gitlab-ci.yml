@@ -56,7 +56,7 @@ covertests:
   script:
     - apt-get -o dir::cache::archives=${APT_CACHE} install -y --no-install-recommends ${APT_PKGS}
     - R -e 'x <- covr::package_coverage();x'
-    - R -e 'write.table(percent_coverage(x), file = "test.txt", row.names = FALSE, col.names = FALSE)'
+    - R -e 'write.table(covr::percent_coverage(x), file = "test.txt", row.names = FALSE, col.names = FALSE)'
 
 
     
