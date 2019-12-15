@@ -21,8 +21,9 @@ getready:
     - apt-get update
     - apt-get install -y --no-install-recommends ${APT_PKGS}
     - apt-get install -y --no-install-recommends qpdf pandoc pandoc-citeproc
+    - R -e 'library(devtools)'
     - R -e 'install.packages(c("lintr","ggthemes", "sp", "mapproj", "maps", "maptools", "rgeos", "shinycssloaders", "shinydashboard"), repos = Sys.getenv("CRAN_MIRROR"), lib = Sys.getenv("R_LIBS_USER"))'
-    - R -e 'devtools::install_github("USGS-R/wateRuse",  repos = Sys.getenv("CRAN_MIRROR"), lib = Sys.getenv("R_LIBS_USER"))'
+    - R -e 'with_libpaths(new = Sys.getenv("R_LIBS_USER"), install_github("USGS-R/wateRuse",  repos = Sys.getenv("CRAN_MIRROR"))'
   cache:
     paths:
      - $R_LIBS_USER
