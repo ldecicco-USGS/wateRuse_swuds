@@ -10,3 +10,7 @@ docs
 _pkgdown.yml
 pkgdown
 .gitlab-ci.yml
+ci/lib
+ci/logs
+
+
