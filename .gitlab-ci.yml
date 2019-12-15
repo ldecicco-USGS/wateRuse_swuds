@@ -12,6 +12,7 @@ variables:
   APT_PKGS: "libgeos-dev"
   CRAN_MIRROR: "https://cloud.r-project.org"
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
+  R_LIBS: "$CI_PROJECT_DIR/ci/lib"
   CHECK_DIR: "$CI_PROJECT_DIR/ci/logs"
 
 
