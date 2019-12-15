@@ -47,11 +47,13 @@ buildcheck:
 unittests:
   stage: test
   script:
+    - apt-get -o dir::cache::archives="apt-cache" install -y --no-install-recommends ${APT_PKGS}
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
 
 covertests:
   stage: test
   script:
+    - apt-get -o dir::cache::archives="apt-cache" install -y --no-install-recommends ${APT_PKGS}
     - R -e 'x <- covr::package_coverage();x'
     - R -e 'write.table(percent_coverage(x), file = "test.txt", row.names = FALSE, col.names = FALSE)'
 
