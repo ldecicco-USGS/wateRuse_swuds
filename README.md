@@ -1,6 +1,5 @@
 # WUReview <img src="man/figures/logo.png" alt="WUReview" height="150px" align="right" />
-
-[![travis](https://travis-ci.org/USGS-R/wateRuse_swuds.svg?branch=master)](https://travis-ci.org/USGS-R/wateRuse_swuds) [![Codecov test coverage](https://codecov.io/gh/USGS-R/wateRuse_swuds/branch/master/graph/badge.svg)](https://codecov.io/gh/USGS-R/wateRuse_swuds?branch=master)  [![status](https://img.shields.io/badge/USGS-Support-yellow.svg)](https://owi.usgs.gov/R/packages.html#support)  
+ 
 
 ## Setup data
 
