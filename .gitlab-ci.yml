@@ -15,8 +15,8 @@ variables:
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
   R_LIBS: "$CI_PROJECT_DIR/ci/lib"
   CHECK_DIR: "$CI_PROJECT_DIR/ci/logs"
-  BUILD_LOGS_DIR: "$CI_PROJECT_DIR/ci/logs/$CI_PROJECT_NAME.Rcheck"
-  COV_LOGS_DIR: "$CI_PROJECT_DIR/ci/logs/$CI_PROJECT_NAME.txt"
+  BUILD_LOGS_DIR: "$CI_PROJECT_DIR/ci/logs"
+  COV_LOGS_FILE: "$CI_PROJECT_NAME.txt"
 
 before_script:
   - mkdir -p $APT_CACHE
@@ -42,12 +42,11 @@ buildcheck:
     - mkdir -p $BUILD_LOGS_DIR
     - apt-get -o dir::cache::archives=${APT_CACHE} install -y --no-install-recommends qpdf pandoc pandoc-citeproc
     - R CMD build . --no-build-vignettes --no-manual
-    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error", check_dir = Sys.getenv("BUILD_LOGS_DIR"))'
+    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error", check_dir = file.path(Sys.getenv("BUILD_LOGS_DIR"),paste0(Sys.getenv("CI_PROJECT_NAME"),".Rcheck")))'
     - R -e 'lintr::lint_package()'
   artifacts:
     paths:
       - $BUILD_LOGS_DIR
-    
 
 unittests:
   stage: test
@@ -57,9 +56,9 @@ unittests:
 covertests:
   stage: test
   script:
-    - mkdir -p $COV_LOGS_DIR
-    - R -e 'x <- covr::package_coverage();x;write.table(covr::percent_coverage(x), file = Sys.getenv("$COV_LOGS_DIR"), row.names = FALSE, col.names = FALSE)'
+    - mkdir -p $BUILD_LOGS_DIR
+    - R -e 'x <- covr::package_coverage();x;write.table(covr::percent_coverage(x), file = file.path(Sys.getenv("$BUILD_LOGS_DIR"),Sys.getenv("$COV_LOGS_FILE")), row.names = FALSE, col.names = FALSE)'
   artifacts:
     paths: 
-      - $COV_LOGS_DIR
+      - $BUILD_LOGS_DIR
 
