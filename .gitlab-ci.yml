@@ -10,53 +10,55 @@ variables:
   _R_CHECK_FORCE_SUGGESTS_: "true"
   CODECOV_TOKEN: "CODECOV_TOKEN_STRING"
   APT_PKGS: "libgeos-dev"
-  APT_CACHE: "apt-cache"
+  APT_CACHE: "$CI_PROJECT_DIR/ci/lib/apt-cache"
   CRAN_MIRROR: "https://cloud.r-project.org"
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
   R_LIBS: "$CI_PROJECT_DIR/ci/lib"
   CHECK_DIR: "$CI_PROJECT_DIR/ci/logs"
+  BUILD_LOGS_DIR: "$CI_PROJECT_DIR/ci/logs/$CI_PROJECT_NAME.Rcheck"
+  COV_LOGS_DIR: "$CI_PROJECT_DIR/ci/logs/$CI_PROJECT_NAME.txt"
 
+before_script:
+  - mkdir -p $APT_CACHE
+  - apt-get update
+  - apt-get -o dir::cache::archives=${APT_CACHE} install -y --no-install-recommends ${APT_PKGS}
 
 getready:
   stage: .pre
   script:
-    - mkdir -p $R_LIBS_USER $BUILD_LOGS_DIR $APT_CACHE
-    - apt-get update
-    - apt-get -o dir::cache::archives="apt-cache" install -y --no-install-recommends ${APT_PKGS}
+    - mkdir -p $R_LIBS_USER $BUILD_LOGS_DIR
     - R -e 'install.packages(c("lintr","ggthemes", "sp", "mapproj", "maps", "maptools", "rgeos", "shinycssloaders", "shinydashboard"), repos = Sys.getenv("CRAN_MIRROR"), lib = Sys.getenv("R_LIBS_USER"))'
     - R -e 'withr::with_libpaths(new = Sys.getenv("R_LIBS_USER"), remotes::install_github("USGS-R/wateRuse",  repos = Sys.getenv("CRAN_MIRROR")))'
   cache:
     paths:
      - $R_LIBS_USER
-     - $APT_CACHE
   artifacts:
     paths:
      - $R_LIBS_USER
-     - $APT_CACHE
 
 buildcheck:
   stage: check
   script:
-    - apt-get -o dir::cache::archives=${APT_CACHE} install -y --no-install-recommends ${APT_PKGS}
+    - mkdir -p $BUILD_LOGS_DIR
     - apt-get -o dir::cache::archives=${APT_CACHE} install -y --no-install-recommends qpdf pandoc pandoc-citeproc
     - R CMD build . --no-build-vignettes --no-manual
-    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error")'
+    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = "error", check_dir = Sys.getenv("BUILD_LOGS_DIR"))'
     - R -e 'lintr::lint_package()'
+  artifacts:
+    paths:
+      - $BUILD_LOGS_DIR
     
 
 unittests:
   stage: test
   script:
-    - apt-get -o dir::cache::archives=${APT_CACHE} install -y --no-install-recommends ${APT_PKGS}
-    - R -e '.libPaths()'
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
 
 covertests:
   stage: test
   script:
-    - apt-get -o dir::cache::archives=${APT_CACHE} install -y --no-install-recommends ${APT_PKGS}
-    - R -e 'x <- covr::package_coverage();x;write.table(covr::percent_coverage(x), file = "test.txt", row.names = FALSE, col.names = FALSE)'
+    - R -e 'x <- covr::package_coverage();x;write.table(covr::percent_coverage(x), file = $COV_LOGS_DIR, row.names = FALSE, col.names = FALSE)'
   artifacts:
     paths: 
-      - 'test.txt'
+      - $COV_LOGS_DIR
 
