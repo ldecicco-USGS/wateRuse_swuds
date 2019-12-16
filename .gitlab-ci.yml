@@ -57,7 +57,7 @@ unittests:
 covertests:
   stage: test
   script:
-    - R -e 'x <- covr::package_coverage();x;write.table(covr::percent_coverage(x), file = $COV_LOGS_DIR, row.names = FALSE, col.names = FALSE)'
+    - R -e 'x <- covr::package_coverage();x;write.table(covr::percent_coverage(x), file = Sys.getenv("$COV_LOGS_DIR")", row.names = FALSE, col.names = FALSE)'
   artifacts:
     paths: 
       - $COV_LOGS_DIR
