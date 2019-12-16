@@ -56,8 +56,9 @@ covertests:
   stage: test
   script:
     - mkdir -p $BUILD_LOGS_DIR
+    - R -e 'cat(Sys.getenv("$COV_LOGS_FILE"))'
     - R -e 'x <- covr::package_coverage();x;write.table(covr::percent_coverage(x), file = Sys.getenv("$COV_LOGS_FILE"), row.names = FALSE, col.names = FALSE)'
   artifacts:
     paths: 
-      - $COV_LOGS_FILE
+      - $BUILD_LOGS_DIR
 
